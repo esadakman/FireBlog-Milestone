@@ -1,4 +1,4 @@
-@import "./scss/reset";
+@import "./scss/reset", "./scss/variables";
 
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap");
 
@@ -11,5 +11,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // width: 100vw;
-  background-color: #050f24;
+  background-color: $backgroundColor;
 }
