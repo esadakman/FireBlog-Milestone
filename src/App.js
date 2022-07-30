@@ -1,6 +1,6 @@
 import AppRouter from "./router/AppRouter";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { green, purple } from "@mui/material/colors";
+// import { green, purple } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {

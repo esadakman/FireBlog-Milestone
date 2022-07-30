@@ -38,7 +38,7 @@ const Navbar = () => {
               variant="link"
               noWrap
               component={RouterLink}
-              to="/main"
+              to="/"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -78,7 +78,7 @@ const Navbar = () => {
                 <MenuItem component={RouterLink} to="/main">
                   Home
                 </MenuItem>
-                <MenuItem component={RouterLink} to="/">
+                <MenuItem component={RouterLink} to="/login">
                   Login
                 </MenuItem>
                 <MenuItem
@@ -120,7 +120,7 @@ const Navbar = () => {
                 sx={{ color: "white" }}
                 variant="link"
                 component={RouterLink}
-                to="/main"
+                to="/"
               >
                 Home
               </Button>
@@ -129,7 +129,7 @@ const Navbar = () => {
                 sx={{ color: "white" }}
                 variant="link"
                 component={RouterLink}
-                to="/"
+                to="/login"
               >
                 Login
               </Button>

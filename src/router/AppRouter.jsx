@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 // import { AuthContext } from "../context/AuthContext";
@@ -21,14 +22,9 @@ const AppRouter = () => {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/" element={<Main />} /> */}
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/details/:id" element={<PrivateRouter />}>
-          <Route path="" element={<MovieDetail />} />
-        </Route> */}
       </Routes>
       <Footer />
     </BrowserRouter>
