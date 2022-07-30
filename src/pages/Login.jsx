@@ -1,5 +1,6 @@
 import React from "react";
 import "./pagesStyles/Login.scss";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const Login = () => {
   return (
@@ -11,10 +12,6 @@ const Login = () => {
       <form className="formik">
         <h3>Login Here</h3>
 
-        <label htmlFor="name">Name</label>
-        <input type="text" placeholder="Email or Phone" id="name" />
-        <label htmlFor="surname">Surname</label>
-        <input type="text" placeholder="Email or Phone" id="surname" />
         <label htmlFor="username">Username</label>
         <input type="text" placeholder="Email or Phone" id="username" />
 
@@ -23,7 +20,10 @@ const Login = () => {
 
         <button className="login">Log In</button>
         <div className="social">
-          <button className="go">Sign in with Google</button>
+          <button className="go">
+            <GoogleIcon />
+            Sign in with Google
+          </button>
         </div>
       </form>
     </div>
