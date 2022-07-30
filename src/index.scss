@@ -13,3 +13,27 @@ body {
   // width: 100vw;
   background-color: $backgroundColor;
 }
+
+::-webkit-scrollbar-track {
+  border: 5px solid white;
+  // border color does not support transparent on scrollbar
+  // border-color: transparent;
+  background-color: #b2bec3;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+  background-color: #dfe6e9;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $san-juan;
+  border-radius: 8px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}

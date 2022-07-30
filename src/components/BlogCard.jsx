@@ -35,8 +35,8 @@ const BlogCard = () => {
                   The antsy bingers of Netflix will eagerly anticipate the
                   digital release of the Survive soundtrack, out today.
                 </p>
-                <Link to="#" className="button">
-                  <BlogForm />
+                <Link to="/" className="button">
+                  {/* <BlogForm /> */}Read more...
                 </Link>
               </div>
             </div>

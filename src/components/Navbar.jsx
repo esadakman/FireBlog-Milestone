@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/logo.png";
 import { Link as RouterLink } from "react-router-dom";
 import "./ComponentsStyles/Navbar.scss";
+import NewBlog from "../pages/NewBlog";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -75,12 +76,16 @@ const Navbar = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem component={RouterLink} to="/main">
+                <MenuItem component={RouterLink} to="/">
                   Home
                 </MenuItem>
                 <MenuItem component={RouterLink} to="/login">
                   Login
                 </MenuItem>
+                <MenuItem /* component={RouterLink} to="/newblog" */>
+                  <NewBlog />
+                </MenuItem>
+
                 <MenuItem
                   component={RouterLink}
                   to="/register"
@@ -123,6 +128,14 @@ const Navbar = () => {
                 to="/"
               >
                 Home
+              </Button>
+              <Button
+                sx={{ color: "white" }}
+                // variant="link"
+                // component={RouterLink}
+                // to="/newblog"
+              >
+                <NewBlog />
               </Button>
 
               <Button
