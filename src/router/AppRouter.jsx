@@ -5,8 +5,10 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Login from "../pages/Login";
+import Register from "../pages/Register";
 // import { AuthContext } from "../context/AuthContext";
 // import Main from "../pages/Main";
 
@@ -17,9 +19,10 @@ const AppRouter = () => {
   //   }
   return (
     <BrowserRouter>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         {/* <Route path="/" element={<Main />} /> */}
         {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -27,6 +30,7 @@ const AppRouter = () => {
           <Route path="" element={<MovieDetail />} />
         </Route> */}
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

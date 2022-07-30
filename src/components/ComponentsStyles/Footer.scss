@@ -1,0 +1,35 @@
+@import "../../scss/mixins";
+
+.FooterStyle {
+  //   z-index: 5;
+  display: flex;
+  text-decoration: none;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.13);
+  color: black;
+  font-family: "Roboto", sans-serif;
+  align-items: center;
+  height: 8vh;
+  padding: 0 1.5rem;
+  bottom: 0;
+  .TextStyle {
+    font-size: 0.7rem;
+    color: white;
+    & > p {
+      color: white;
+    }
+  }
+  .Logos {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.7rem;
+    & > a {
+      transition: all 0.3s linear;
+      color: white;
+      &:hover {
+        color: aqua;
+        transform: scale(1.2);
+      }
+    }
+  }
+}

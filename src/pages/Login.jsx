@@ -11,6 +11,10 @@ const Login = () => {
       <form className="formik">
         <h3>Login Here</h3>
 
+        <label htmlFor="name">Name</label>
+        <input type="text" placeholder="Email or Phone" id="name" />
+        <label htmlFor="surname">Surname</label>
+        <input type="text" placeholder="Email or Phone" id="surname" />
         <label htmlFor="username">Username</label>
         <input type="text" placeholder="Email or Phone" id="username" />
 
