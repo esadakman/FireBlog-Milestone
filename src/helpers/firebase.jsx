@@ -13,7 +13,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { toastError, toastSuccess, toastWarn } from "./customToastify";
+// import { toastError, toastSuccess, toastWarn } from "./customToastify";
 // import { toastError, toastSuccess, toastWarn } from "../helpers/ToastNotify";
 
 const firebaseConfig = {
@@ -43,7 +43,7 @@ export const register = async (email, password, displayName, navigate) => {
     await updateProfile(auth.currentUser, { displayName: displayName });
     navigate("/");
     console.log(displayName);
-    toastSuccess("Signed Up ");
+    // toastSuccess("Signed Up ");
     return user;
   } catch (error) {
     if (error.code === "auth/email-already-in-use") {
@@ -68,7 +68,7 @@ export const register = async (email, password, displayName, navigate) => {
 export const login = async (email, password, navigate) => {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-    toastSuccess("Logged In");
+    // toastSuccess("Logged In");
     navigate("/");
     return user;
   } catch (error) {
@@ -116,7 +116,8 @@ export const GoogleRegister = (navigate) => {
       if (error.code === "auth/popup-closed-by-user") {
         console.log("Popup closed by user");
       } else {
-        toastError(error.message);
+        console.log(error.message);
+        // toastError(error.message);
       }
     });
 };
@@ -126,14 +127,14 @@ export const forgotPassword = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
-      toastWarn("Please check your mail box!");
+      // toastWarn("Please check your mail box!");
       // alert("Please check your mail box!");
     })
     .catch((error) => {
       if (error.code === "auth/missing-email") {
-        toastWarn("Please enter your mail adress!");
+        // toastWarn("Please enter your mail adress!");
       } else {
-        toastError(error.message);
+        // toastError(error.message);
       }
     });
 };

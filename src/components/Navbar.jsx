@@ -13,12 +13,16 @@ import logo from "../assets/logo.png";
 import { Link as RouterLink } from "react-router-dom";
 import "./ComponentsStyles/Navbar.scss";
 import NewBlog from "../pages/NewBlog";
+import { useAuthContext } from "../contexts/AuthContext";
+import { logout } from "../helpers/firebase";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
+  const { userCheck } = useAuthContext();
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -28,7 +32,7 @@ const Navbar = () => {
     sessionStorage.clear();
     localStorage.clear();
   };
-
+  console.log(userCheck.displayName);
   return (
     // <header className="navbar">
     <AppBar
@@ -79,23 +83,41 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem component={RouterLink} to="/">
-                Home
-              </MenuItem>
-              <MenuItem component={RouterLink} to="/login">
-                Login
-              </MenuItem>
-              <MenuItem /* component={RouterLink} to="/newblog" */>
-                <NewBlog />
-              </MenuItem>
+              {userCheck ? (
+                <div>
+                  <MenuItem component={RouterLink} to="/">
+                    Home
+                  </MenuItem>
+                  <MenuItem /* component={RouterLink} to="/newblog" */>
+                    <NewBlog />
+                  </MenuItem>
 
-              <MenuItem
-                component={RouterLink}
-                to="/register"
-                onClick={logOutCleaner}
-              >
-                Register
-              </MenuItem>
+                  <MenuItem
+                    component={RouterLink}
+                    to="/register"
+                    onClick={logout}
+                  >
+                    Log Out
+                  </MenuItem>
+                </div>
+              ) : (
+                <div>
+                  <MenuItem component={RouterLink} to="/">
+                    Home
+                  </MenuItem>
+                  <MenuItem component={RouterLink} to="/login">
+                    Login
+                  </MenuItem>
+
+                  <MenuItem
+                    component={RouterLink}
+                    to="/register"
+                    onClick={logOutCleaner}
+                  >
+                    Register
+                  </MenuItem>
+                </div>
+              )}
             </Menu>
           </Box>
           <Typography
@@ -124,40 +146,76 @@ const Navbar = () => {
               justifyContent: "right",
             }}
           >
-            <Button
-              sx={{ color: "white" }}
-              variant="link"
-              component={RouterLink}
-              to="/"
-            >
-              Home
-            </Button>
-            <Button
-              sx={{ color: "white" }}
-              // variant="link"
-              // component={RouterLink}
-              // to="/newblog"
-            >
-              <NewBlog />
-            </Button>
+            {userCheck ? (
+              <div sx={{ display: "flex" }}>
+                <Button
+                  className="mb-0 text-capitalize"
+                  sx={{
+                    color: "white",
+                    "&:hover": {
+                      color: "white",
+                      pointerEvents: "none !important",
+                    },
+                  }}
+                >
+                  {userCheck.displayName}
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  variant="link"
+                  component={RouterLink}
+                  to="/"
+                >
+                  Home
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  // variant="link"
+                  // component={RouterLink}
+                  // to="/newblog"
+                >
+                  <NewBlog />
+                </Button>
 
-            <Button
-              sx={{ color: "white" }}
-              variant="link"
-              component={RouterLink}
-              to="/login"
-            >
-              Login
-            </Button>
-            <Button
-              sx={{ color: "white" }}
-              variant="link"
-              component={RouterLink}
-              to="/register"
-              onClick={logOutCleaner}
-            >
-              Register
-            </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  variant="link"
+                  component={RouterLink}
+                  to="/login"
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <Button
+                  sx={{ color: "white" }}
+                  variant="link"
+                  component={RouterLink}
+                  to="/"
+                >
+                  Home
+                </Button>
+
+                <Button
+                  sx={{ color: "white" }}
+                  variant="link"
+                  component={RouterLink}
+                  to="/login"
+                >
+                  Login
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  variant="link"
+                  component={RouterLink}
+                  to="/register"
+                >
+                  Register
+                </Button>
+              </div>
+            )}
           </Box>
         </Toolbar>
       </Container>

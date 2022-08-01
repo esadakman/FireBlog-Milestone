@@ -53,9 +53,9 @@ const Register = () => {
             </div>
           </div>
           <div className={registerStyle["userPassword"]}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Email Adress</label>
             <input
-              type="text"
+              type="email"
               placeholder="Email Adress"
               id="username"
               onChange={(e) => setEmail(e.target.value)}

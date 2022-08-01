@@ -3,7 +3,7 @@ import "./pagesStyles/Login.scss";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useNavigate } from "react-router-dom";
 // import { toastInfo, toastWarn } from "../helpers/customToastify";
-import { login } from "../helpers/firebase";
+import { GoogleRegister, login } from "../helpers/firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     // const user = await login(email, password, navigate);
     if (email && password) {
-      await login(email, password);
+      await login(email, password, navigate);
     } else {
       // toastWarn("Please fill out all fields.");
       console.log("asd");
@@ -48,10 +48,15 @@ const Login = () => {
 
         <button className="login">Log In</button>
         <div className="social">
-          <button className="go">
+          <div
+            className="go"
+            onClick={() => {
+              GoogleRegister(navigate);
+            }}
+          >
             <GoogleIcon />
             Sign in with Google
-          </button>
+          </div>
         </div>
       </form>
     </div>
