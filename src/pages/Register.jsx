@@ -3,7 +3,7 @@ import registerStyle from "./pagesStyles/register.module.scss";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useNavigate } from "react-router-dom";
 import { GoogleRegister, register } from "../helpers/firebase";
-import { toastWarn } from "../helpers/customToastify";
+// import { toastWarn } from "../helpers/customToastify";
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
