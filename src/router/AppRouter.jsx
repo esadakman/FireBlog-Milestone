@@ -6,6 +6,7 @@ import {
   Routes,
 } from "react-router-dom";
 import BlogDetails from "../components/BlogDetails";
+import EditBlog from "../components/EditBlog";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Home from "../pages/Home";
@@ -27,11 +28,7 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/details" element={<BlogDetails />} />
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/details/:id" element={<PrivateRouter />}>
-          <Route path="" element={<MovieDetail />} />
-        </Route> */}
+        <Route path="/edit" element={<EditBlog />} />
       </Routes>
       <Footer />
     </BrowserRouter>

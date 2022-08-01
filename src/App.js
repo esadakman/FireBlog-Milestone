@@ -1,6 +1,8 @@
 import AppRouter from "./router/AppRouter";
 import { createTheme, ThemeProvider } from "@mui/material";
-// import { green, purple } from "@mui/material/colors";
+import { ToastContainer } from "react-toastify";
+import { AuthContextProvider } from "./contexts/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 const theme = createTheme({
   palette: {
@@ -9,13 +11,18 @@ const theme = createTheme({
     },
   },
 });
+
 function App() {
   return (
-    <div className="App">
+    <AuthContextProvider>
       <ThemeProvider theme={theme}>
+        {/* <div className="App"> */}
+        <ToastContainer />
+        <Toaster />
         <AppRouter />
+        {/* </div> */}
       </ThemeProvider>
-    </div>
+    </AuthContextProvider>
   );
 }
 

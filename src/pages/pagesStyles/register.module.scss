@@ -1,0 +1,201 @@
+@import "../../scss/mixins";
+
+// *,
+// *:before,
+// *:after {
+//   padding: 0;
+//   margin: 0;
+//   box-sizing: border-box;
+// }
+.body {
+  //   background-color: #080710;
+  // height: 100vh;
+  .background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    z-index: -2;
+    .shape {
+      height: 200px;
+      width: 200px;
+      position: absolute;
+      border-radius: 50%;
+      &:first-child {
+        background: linear-gradient(#1845ad, #23a2f6);
+        left: -80px;
+        top: -40px;
+        z-index: -2;
+      }
+      &:last-child {
+        background: linear-gradient(to right, #ff512f, #f09819);
+        right: -30px;
+        bottom: -80px;
+      }
+    }
+  }
+  .formDiv {
+    display: flex;
+    // border: 1px solid red;
+    form * {
+      font-family: "Poppins", sans-serif;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      outline: none;
+      border: none;
+      transition: all 0.5s linear;
+    }
+    form {
+      height: fit-content;
+
+      width: 400px;
+      max-width: 400px;
+      min-width: 200px;
+      background-color: rgba(255, 255, 255, 0.13);
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 53%;
+      left: 50%;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+      padding: 2rem;
+      padding-top: 1rem;
+      border: 1px solid red;
+
+      h3 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+      }
+
+      .userPassword {
+        label {
+          display: block;
+          margin-top: 1rem;
+          font-size: 16px;
+          font-weight: 500;
+        }
+        input {
+          display: block;
+          height: 50px;
+          width: 100%;
+          background-color: rgba(255, 255, 255, 0.07);
+          border-radius: 3px;
+          padding: 0 10px;
+          margin: 0.5rem 0;
+          font-size: 14px;
+          font-weight: 300;
+          border-radius: 10px;
+          &:focus {
+            border: 1px solid red;
+          }
+        }
+        ::placeholder {
+          color: #e5e5e5;
+        }
+      }
+      .name {
+        display: flex;
+        gap: 1rem;
+        label {
+          display: block;
+          margin-top: 1rem;
+          font-size: 16px;
+          font-weight: 500;
+        }
+        input {
+          margin-top: 0.5rem;
+          background-color: rgba(255, 255, 255, 0.07);
+          width: 100%;
+          height: 3rem;
+          border-radius: 10px;
+          padding: 0 10px;
+
+          &:focus {
+            border: 1px solid red;
+          }
+        }
+      }
+      button.login {
+        margin-top: 1rem;
+        width: 100%;
+        background-color: #ffffff;
+        color: #080710;
+        padding: 0.5rem 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0.8;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+    .googles {
+      margin-top: 1rem;
+      display: flex;
+      // background: red;
+
+      .go {
+        background: red;
+        width: 100%;
+        // min-width: 160px;
+        border-radius: 3px;
+        padding: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.27);
+        color: #eaf0fb;
+        text-align: center;
+        // margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0.8;
+        gap: 1rem;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@include media-sm {
+  .body {
+    width: 100%;
+    // height: 100vh;
+    .formDiv {
+      form {
+        width: 90%;
+        .social {
+          .go {
+            padding: 0.5rem 0;
+          }
+        }
+      }
+    }
+    .background {
+      width: 80%;
+      .shape {
+        overflow: hidden;
+        &:last-child {
+          background: linear-gradient(to right, #ff512f, #f09819);
+          right: 0px;
+          bottom: 0px;
+        }
+        &:first-child {
+          background: linear-gradient(#1845ad, #23a2f6);
+          left: 0px;
+          top: 0px;
+        }
+      }
+    }
+  }
+}

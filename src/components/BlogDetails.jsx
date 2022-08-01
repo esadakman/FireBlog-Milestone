@@ -5,8 +5,11 @@
 // import Typography from "@mui/material/Typography";
 // import { CardActionArea } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import "./ComponentsStyles/BlogDetails.scss";
+import EditBlog from "./EditBlog";
 
 export default function BlogDetails() {
   return (
@@ -36,9 +39,25 @@ export default function BlogDetails() {
         </div>
         <div className="cardFooter">
           <p>@esadakman </p>
-          <i>
-            <FavoriteBorderIcon />
-          </i>
+          <div className="btnContainer">
+            <Button
+              sx={{
+                minWidth: "15px !important",
+                color: "Red",
+              }}
+            >
+              <DeleteForeverIcon />
+            </Button>
+            <EditBlog />
+            <Button
+              sx={{
+                minWidth: "15px !important",
+                color: "Pink",
+              }}
+            >
+              <FavoriteBorderIcon />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

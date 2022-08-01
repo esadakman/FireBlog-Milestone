@@ -1,15 +1,9 @@
 @import "../../scss/mixins";
 
-// *,
-// *:before,
-// *:after {
-//   padding: 0;
-//   margin: 0;
-//   box-sizing: border-box;
-// }
 .body {
   //   background-color: #080710;
-  height: 100vh;
+  // height: 92vh !important;
+  border: 1px solid red;
   .background {
     width: 430px;
     height: 520px;
@@ -119,10 +113,12 @@
         background-color: rgba(255, 255, 255, 0.27);
         color: #eaf0fb;
         text-align: center;
-        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
         opacity: 0.8;
-
+        gap: 0.5rem;
         &:hover {
           opacity: 1;
         }
@@ -134,7 +130,7 @@
 @include media-sm {
   .body {
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
     form {
       width: 90%;
       .social {
