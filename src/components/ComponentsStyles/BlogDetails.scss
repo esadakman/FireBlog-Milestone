@@ -1,0 +1,60 @@
+@import "../../scss/mixins", "../../scss/variables";
+
+.container {
+  height: 92vh;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto";
+
+  .cardContainer {
+    border-radius: 1rem;
+    box-shadow: rgba(108, 107, 107, 0.3) 0px 19px 38px,
+      rgba(118, 115, 115, 0.22) 0px 15px 12px;
+    background-color: $white;
+    width: 80%;
+    min-width: 300px;
+    max-width: 500px;
+    height: fit-content;
+
+    .title {
+      & > h2 {
+        text-align: center;
+        margin: 0.5rem;
+      }
+      & > img {
+        width: 100%;
+        // height: 20rem;
+      }
+    }
+  }
+  .description {
+    background: #efeefe;
+    text-align: center;
+    // border-radius: 1rem;
+
+    & > h3 {
+      padding: 0.4rem;
+    }
+    & > h6 {
+      font-weight: normal;
+    }
+    & > p {
+      font-size: 1rem;
+      text-align: justify;
+      padding: 1rem;
+      max-height: 230px;
+      overflow: auto;
+    }
+  }
+  .cardFooter {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    & > p {
+      font-weight: 500;
+    }
+  }
+}

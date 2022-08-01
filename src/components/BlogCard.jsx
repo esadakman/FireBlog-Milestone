@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./ComponentsStyles/BlogCard.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import BlogForm from "./BlogForm";
+// import BlogDetails from "./BlogDetails";
 // import ModeCommentIcon from "@mui/icons-material/ModeComment";
 const BlogCard = () => {
   return (
@@ -35,8 +35,8 @@ const BlogCard = () => {
                   The antsy bingers of Netflix will eagerly anticipate the
                   digital release of the Survive soundtrack, out today.
                 </p>
-                <Link to="/" className="button">
-                  {/* <BlogForm /> */}Read more...
+                <Link to="/details" className="button">
+                  Read more...
                 </Link>
               </div>
             </div>
