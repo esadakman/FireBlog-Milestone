@@ -27,10 +27,10 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
-  const logOutCleaner = () => {
-    sessionStorage.clear();
-    localStorage.clear();
-  };
+  // const logOutCleaner = () => {
+  //   sessionStorage.clear();
+  //   localStorage.clear();
+  // };
   console.log(userCheck.displayName);
   return (
     // <header className="navbar">
@@ -111,7 +111,7 @@ const Navbar = () => {
                   <MenuItem
                     component={RouterLink}
                     to="/register"
-                    onClick={logOutCleaner}
+                    // onClick={logOutCleaner}
                   >
                     Register
                   </MenuItem>

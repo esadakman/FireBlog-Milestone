@@ -76,13 +76,14 @@
       .data {
         color: $white;
         transform: translateY(calc(70px + 4em));
+        background-color: rgba(255, 255, 255, 0.262);
         position: absolute;
-        bottom: 10px;
+        bottom: 0px;
         width: 100%;
         transform: translateY(calc(90px + 3em));
         transition: transform 0.3s;
         .content {
-          padding: 1rem;
+          padding: 0.5rem 1rem;
           position: relative;
           z-index: 1;
           h1 {
@@ -93,10 +94,11 @@
             font-size: 12px;
           }
           .title {
-            margin-top: 10px;
+            // margin-top: 10px;
+            margin-bottom: 10px;
           }
           .text {
-            height: 70px;
+            height: 80px;
             margin: 0;
           }
         }
