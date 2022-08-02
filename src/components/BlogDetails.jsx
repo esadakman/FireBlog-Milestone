@@ -1,21 +1,14 @@
-// import * as React from "react";
-// import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
-// import CardMedia from "@mui/material/CardMedia";
-// import Typography from "@mui/material/Typography";
-// import { CardActionArea } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import "./ComponentsStyles/BlogDetails.scss";
+import BlogStyle from "./ComponentsStyles/BlogDetails.module.scss";
 import EditBlog from "./EditBlog";
 
 export default function BlogDetails() {
   return (
-    <div className="container">
-      <div className="cardContainer">
-        <div className="title">
+    <div className={BlogStyle["container"]}>
+      <div className={BlogStyle["cardContainer"]}>
+        <div className={BlogStyle["title"]}>
           <h2>──── Details ────</h2>
           <img
             // style={{ width: "30rem" }}
@@ -23,7 +16,7 @@ export default function BlogDetails() {
             alt="poster"
           />
         </div>
-        <div className="description">
+        <div className={BlogStyle["description"]}>
           <h3>TITLE</h3>
           <h6>Jul 30, 2022</h6>
           <p>
@@ -37,9 +30,9 @@ export default function BlogDetails() {
             vs.) gerek kalmadan uygulamanın Web sunucusu görevini görür.
           </p>
         </div>
-        <div className="cardFooter">
+        <div className={BlogStyle["cardFooter"]}>
           <p>@esadakman </p>
-          <div className="btnContainer">
+          <div className={BlogStyle["btnContainer"]}>
             <Button
               sx={{
                 minWidth: "15px !important",

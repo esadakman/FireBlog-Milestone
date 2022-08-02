@@ -1,6 +1,5 @@
 import AppRouter from "./router/AppRouter";
 import { createTheme, ThemeProvider } from "@mui/material";
-// import { ToastContainer } from "react-toastify";
 import { AuthContextProvider } from "./contexts/AuthContext";
 
 const theme = createTheme({

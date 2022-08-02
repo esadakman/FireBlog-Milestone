@@ -1,7 +1,7 @@
 import {
   BrowserRouter,
-  //   Navigate,
-  //   Outlet,
+  Navigate,
+  Outlet,
   Route,
   Routes,
 } from "react-router-dom";
@@ -9,17 +9,20 @@ import BlogDetails from "../components/BlogDetails";
 import EditBlog from "../components/EditBlog";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useAuthContext } from "../contexts/AuthContext";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import NewBlog from "../pages/NewBlog";
 import Register from "../pages/Register";
-// import { AuthContext } from "../context/AuthContext";
 // import Main from "../pages/Main";
 
 const AppRouter = () => {
-  //   const { currentUser } = useContext(AuthContext);
-  //   function PrivateRouter() {
-  //     return currentUser ? <Outlet /> : <Navigate to="/login" replace />;
-  //   }
+  const { userCheck } = useAuthContext();
+
+  function PrivateRouter() {
+    return userCheck ? <Outlet /> : <Navigate to="/login" replace />;
+  }
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -27,8 +30,11 @@ const AppRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/details" element={<BlogDetails />} />
+        <Route path="/details" element={<PrivateRouter />}>
+          <Route path="/details" element={<BlogDetails />} />
+        </Route>
         <Route path="/edit" element={<EditBlog />} />
+        <Route path="/newblog" element={<NewBlog />} />
       </Routes>
       <Footer />
     </BrowserRouter>

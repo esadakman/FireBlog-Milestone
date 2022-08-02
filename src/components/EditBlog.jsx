@@ -1,10 +1,10 @@
-import "./ComponentsStyles/EditBlog.module.scss";
+import editStyle from "./ComponentsStyles/EditBlog.module.scss";
 import * as React from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 const style = {
   position: "absolute",
@@ -50,7 +50,7 @@ const EditBlog = () => {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <div className="Contact From">
+            <div className={editStyle["update"]}>
               <h2>Update Blog</h2>
               <div>
                 <form /* ref={form} onSubmit={sendEmail} */>
@@ -60,6 +60,7 @@ const EditBlog = () => {
                     label="Title"
                     variant="standard"
                     placeholder="Title"
+                    autoFocus
                     required
                   />
                   <input
@@ -68,6 +69,7 @@ const EditBlog = () => {
                     label="ImageUrl"
                     variant="standard"
                     placeholder="Image URL"
+                    autoFocus
                     required
                   />
                   <textarea

@@ -8,7 +8,8 @@ const BlogContextProvider = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
-
+  const [newPostOpen, setNewPostOpen] = useState(false);
+  const [editPostOpen, setEditPostOpen] = useState(false);
   const [posts, setPosts] = useState([]);
   const [updateInfo, setUpdateInfo] = useState({});
   return;

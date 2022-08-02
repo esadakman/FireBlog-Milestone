@@ -12,7 +12,6 @@ import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/logo.png";
 import { Link as RouterLink } from "react-router-dom";
 import "./ComponentsStyles/Navbar.scss";
-import NewBlog from "../pages/NewBlog";
 import { useAuthContext } from "../contexts/AuthContext";
 import { logout } from "../helpers/firebase";
 
@@ -88,8 +87,8 @@ const Navbar = () => {
                   <MenuItem component={RouterLink} to="/">
                     Home
                   </MenuItem>
-                  <MenuItem /* component={RouterLink} to="/newblog" */>
-                    <NewBlog />
+                  <MenuItem component={RouterLink} to="/newblog">
+                    New Blog
                   </MenuItem>
 
                   <MenuItem
@@ -168,13 +167,14 @@ const Navbar = () => {
                 >
                   Home
                 </Button>
+
                 <Button
                   sx={{ color: "white" }}
-                  // variant="link"
-                  // component={RouterLink}
-                  // to="/newblog"
+                  variant="link"
+                  component={RouterLink}
+                  to="/newblog"
                 >
-                  <NewBlog />
+                  New Blog
                 </Button>
 
                 <Button

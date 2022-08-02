@@ -4,6 +4,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import { useNavigate } from "react-router-dom";
 // import { toastInfo, toastWarn } from "../helpers/customToastify";
 import { GoogleRegister, login } from "../helpers/firebase";
+import { toastWarn } from "../helpers/customToastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const Login = () => {
     if (email && password) {
       await login(email, password, navigate);
     } else {
-      // toastWarn("Please fill out all fields.");
+      toastWarn("Please fill out all fields.");
       console.log("asd");
     }
   };
