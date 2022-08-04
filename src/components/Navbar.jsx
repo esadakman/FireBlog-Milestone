@@ -31,7 +31,7 @@ const Navbar = () => {
   //   sessionStorage.clear();
   //   localStorage.clear();
   // };
-  console.log(userCheck.displayName);
+  // console.log(userCheck.displayName);
   return (
     // <header className="navbar">
     <AppBar

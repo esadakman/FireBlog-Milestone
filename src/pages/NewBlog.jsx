@@ -1,8 +1,6 @@
-import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import { auth, db } from "../helpers/firebase";
 import NewBlogStyle from "./pagesStyles/NewBlog.module.scss";
 
 const NewBlog = () => {
@@ -11,35 +9,7 @@ const NewBlog = () => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  // const [formData, setFormData] = useState({
-  //   title: "",
-  //   description: "",
-  //   image: "",
-  //   // author: "",
-  //   createdAt: Timestamp.now().toDate(),
-  //   // likes: "",
-  // });
   const navigate = useNavigate();
-
-  // const handlePublish = (e) => {};
-
-  const postCollectionRef = collection(db, "/Articles");
-
-  const createPost = async () => {
-    if (title && description && imageUrl) {
-      await addDoc(postCollectionRef, {
-        title,
-        description,
-        imageUrl,
-        createdAt: Timestamp.now().toDate(),
-        author: {
-          name: auth.currentUser.displayName,
-          id: auth.currentUser.uid,
-        },
-      });
-      navigate("/");
-    }
-  };
 
   return (
     <div className={NewBlogStyle["container"]}>
@@ -61,7 +31,7 @@ const NewBlog = () => {
               id="image"
               label="ImageUrl"
               placeholder="Image URL"
-              required
+              // required
               type="text"
               name="image"
               className="form-control"
@@ -70,7 +40,7 @@ const NewBlog = () => {
             />
             <textarea
               placeholder="Content"
-              required
+              // required
               autoFocus
               margin="normal"
               id="content"
@@ -80,12 +50,7 @@ const NewBlog = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <button
-              /* type="submit" */ value="Send"
-              onClick={(e) => createPost(e)}
-            >
-              Send
-            </button>
+            <button /* type="submit" */ value="Send">Send</button>
           </form>
         </div>
       </div>

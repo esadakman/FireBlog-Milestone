@@ -1,126 +1,112 @@
-// import { initializeApp } from "firebase/app";
-// import {getAuth,GoogleAuthProvider} from "firebase/auth"
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
-
 import { initializeApp } from "firebase/app";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
-  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
-  signInWithPopup,
-  sendPasswordResetEmail,
 } from "firebase/auth";
-// import { toastError, toastSuccess, toastWarn } from "./customToastify";
-// import { toastError, toastSuccess, toastWarn } from "../helpers/ToastNotify";
+// import {
+//   toastErrorNotify,
+//   toastSuccessNotify,
+//   toastWarnNotify,
+// } from "../helpers/ToastNotify";
 
+//! firebase console settings bölümünden firebaseconfig ayarlarını al
 const firebaseConfig = {
-  apiKey: "AIzaSyA04MIKTIm39ifgn6fPkTIerrsBaU_Cv18",
-  authDomain: "fireblog-e69a1.firebaseapp.com",
-  projectId: "fireblog-e69a1",
-  storageBucket: "fireblog-e69a1.appspot.com",
-  messagingSenderId: "494740012141",
-  appId: "1:494740012141:web:5986e8f9b157249f269364",
+  apiKey: "AIzaSyB56HxDAJ-sqHXbsRde8oO89_nUJ_AsgnI",
+  authDomain: "fireblog-daba0.firebaseapp.com",
+  projectId: "fireblog-daba0",
+  storageBucket: "fireblog-daba0.appspot.com",
+  messagingSenderId: "1069463583135",
+  appId: "1:1069463583135:web:917fbcb954dbbddec925aa",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// !
 
-export const storage = getStorage(app);
-export const db = getFirestore(app);
-// !
-export const auth = getAuth(app);
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
 
-export const register = async (email, password, displayName, navigate) => {
+export const register = async (email, password, navigate, displayName) => {
+  //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
   try {
-    const { user } = await createUserWithEmailAndPassword(
+    let userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    await updateProfile(auth.currentUser, { displayName: displayName });
+    //? kullanıcı profilini güncellemek için kullanılan firebase metodu
+    await updateProfile(auth.currentUser, {
+      displayName: displayName,
+    });
+    // toastSuccessNotify('Registered successfully!');
     navigate("/");
-    console.log(displayName);
-    // toastSuccess("Signed Up ");
-    return user;
-  } catch (error) {
-    if (error.code === "auth/email-already-in-use") {
-      // toastError("The email address is already in use");
-      console.log("The email address is already in use");
-    } else if (
-      error.code === "auth/invalid-email" ||
-      error.code === "auth/missing-email"
-    ) {
-      // toastError("The email address is not valid.");
-      console.log("The email address is not valid.");
-    } else if (error.code === "auth/weak-password") {
-      // toastWarn("Password should be at least 6 characters");
-      console.log("Password should be at least 6 characters");
-    } else {
-      // toastError(error.message);
-      console.log(error.message);
-    }
+    console.log(userCredential);
+  } catch (err) {
+    // toastErrorNotify(err.message);
   }
 };
 
+//* https://console.firebase.google.com/
+//* => Authentication => sign-in-method => enable Email/password
+//! Email/password ile girişi enable yap
 export const login = async (email, password, navigate) => {
+  //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
   try {
-    const user = await signInWithEmailAndPassword(auth, email, password);
-    // toastSuccess("Logged In");
+    let userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     navigate("/");
-    return user;
-  } catch (error) {
-    if (
-      error.code === "auth/wrong-password" ||
-      error.code === "auth/invalid-email"
-    ) {
-      // toastError("Your email or password is incorrect. \nPlease Try Again");
-      console.log("Your email or password is incorrect. \nPlease Try Again");
-    } else if (error.code === "auth/user-not-found") {
-      // toastWarn("User not found.");
-      console.log("User not found.");
+    // toastSuccessNotify('Logged in successfully!');
+    // sessionStorage.setItem('user', JSON.stringify(userCredential.user));
+    console.log(userCredential);
+  } catch (err) {
+    // toastErrorNotify(err.message);
+    console.log(err);
+  }
+};
+
+export const userObserver = (setUserCheck) => {
+  //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUserCheck(user);
     } else {
-      // toastError(error.message);
-      console.log(error.message);
+      // User is signed out
+      setUserCheck(false);
     }
-  }
+  });
 };
 
-export const logout = async () => {
-  try {
-    await signOut(auth);
-    // toastSuccess("Logged out !");
-    console.log("Logged out !");
-    return true;
-  } catch (error) {
-    // toastWarn(error.message);
-    console.log(error.message);
-  }
+export const logout = () => {
+  signOut(auth);
 };
 
-// ! Provider
-const provider = new GoogleAuthProvider();
-
+//* https://console.firebase.google.com/
+//* => Authentication => sign-in-method => enable Google
+//! Google ile girişi enable yap
+//* => Authentication => sign-in-method => Authorized domains => add domain
+//! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
 export const GoogleRegister = (navigate) => {
+  //? Google ile giriş yapılması için kullanılan firebase metodu
+  const provider = new GoogleAuthProvider();
+  //? Açılır pencere ile giriş yapılması için kullanılan firebase metodu
   signInWithPopup(auth, provider)
     .then((result) => {
-      const user = result.user;
-      // toastSuccess("Logged In");
-      console.log("Logged In");
+      console.log(result);
       navigate("/");
-      return user;
+      // toastSuccessNotify('Logged out successfully!');
     })
     .catch((error) => {
-      if (error.code === "auth/popup-closed-by-user") {
-        console.log("Popup closed by user");
-      } else {
-        console.log(error.message);
-        // toastError(error.message);
-      }
+      // Handle Errors here.
+      console.log(error);
     });
 };
 
@@ -129,16 +115,12 @@ export const forgotPassword = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
-      // toastWarn("Please check your mail box!");
+      // toastWarnNotify("Please check your mail box!");
       // alert("Please check your mail box!");
     })
-    .catch((error) => {
-      if (error.code === "auth/missing-email") {
-        // toastWarn("Please enter your mail adress!");
-      } else {
-        // toastError(error.message);
-      }
+    .catch((err) => {
+      // toastErrorNotify(err.message);
+      // alert(err.message);
+      // ..
     });
 };
-
-export default app;
