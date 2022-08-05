@@ -1,6 +1,7 @@
 import AppRouter from "./router/AppRouter";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { AuthContextProvider } from "./contexts/AuthContext";
+import { BlogContextProvider } from "./contexts/BlogContext";
 
 const theme = createTheme({
   palette: {
@@ -13,9 +14,11 @@ const theme = createTheme({
 function App() {
   return (
     <AuthContextProvider>
-      <ThemeProvider theme={theme}>
-        <AppRouter />
-      </ThemeProvider>
+      <BlogContextProvider>
+        <ThemeProvider theme={theme}>
+          <AppRouter />
+        </ThemeProvider>
+      </BlogContextProvider>
     </AuthContextProvider>
   );
 }

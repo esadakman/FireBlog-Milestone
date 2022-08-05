@@ -1,41 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import BlogCardStyle from "./ComponentsStyles/BlogCard.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useAuthContext } from "../contexts/AuthContext";
-import { getDatabase, onValue, ref } from "firebase/database";
-import app from "../helpers/firebase";
-// import BlogDetails from "./BlogDetails";
-
-export const useFetch = () => {
-  const [isLoading, setIsLoading] = useState();
-  const [contactList, setContactList] = useState();
-  useEffect(() => {
-    const db = getDatabase(app);
-    const userRef = ref(db, "blog/");
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
-      const userArray = [];
-
-      for (let id in data) {
-        userArray.push({ id, ...data[id] });
-      }
-      setContactList(userArray);
-      setIsLoading(false);
-    });
-  }, []);
-  return { isLoading, contactList };
-};
+import { useBlogContext } from "../contexts/BlogContext";
 
 const BlogCard = () => {
-  // const { data } = useAuthContext();
-  // console.log(data[0]);
-  const { isLoading, contactList } = useFetch();
-  console.log(contactList[0].createdAt);
+  const { isLoading, data } = useBlogContext();
   return (
     <>
       <div className={BlogCardStyle["row"]}>
-        {contactList?.map(
+        {data?.map(
           ({ id, title, description, imageUrl, createdAt, author }) => (
             <div className={BlogCardStyle["card"]} key={id}>
               <div
@@ -45,8 +19,8 @@ const BlogCard = () => {
                 <div className={BlogCardStyle["header"]}>
                   <div className={BlogCardStyle["date"]}>
                     <span className={BlogCardStyle["day"]}>{createdAt}</span>
-                    <span className={BlogCardStyle["month"]}>Aug</span>
-                    <span className={BlogCardStyle["year"]}>2016</span>
+                    {/* <span className={BlogCardStyle["month"]}>Aug</span>
+                    <span className={BlogCardStyle["year"]}>2016</span> */}
                   </div>
                   <ul className={BlogCardStyle["menu-content"]}>
                     <li>

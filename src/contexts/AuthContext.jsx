@@ -9,7 +9,6 @@ export const useAuthContext = () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [userCheck, setUserCheck] = useState("");
-  const [data, setData] = useState([]);
   // ? Kullanıcının durumunu takip etmek için fonksiyonumu buraya yazdım ve ihtiyaç durumunda useContext sayesinde çağırdım
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -23,8 +22,6 @@ export const AuthContextProvider = ({ children }) => {
   const values = {
     userCheck,
     setUserCheck,
-    data,
-    setData,
   };
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
