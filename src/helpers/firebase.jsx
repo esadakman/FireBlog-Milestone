@@ -3,18 +3,13 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
-  onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
-// import {
-//   toastErrorNotify,
-//   toastSuccessNotify,
-//   toastWarnNotify,
-// } from "../helpers/ToastNotify";
+import { getDatabase } from "firebase/database";
 
 //! firebase console settings bölümünden firebaseconfig ayarlarını al
 const firebaseConfig = {
@@ -30,77 +25,83 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
+export const db = getDatabase(app);
 
-export default app;
-
-// ! Register
-export const register = async (email, password, navigate, displayName) => {
+export const register = async (email, password, displayName, navigate) => {
   try {
-    let userCredential = await createUserWithEmailAndPassword(
+    const { user } = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    await updateProfile(auth.currentUser, {
-      displayName: displayName,
-    });
-    // toastSuccessNotify('Registered successfully!');
+    await updateProfile(auth.currentUser, { displayName: displayName });
     navigate("/");
-    console.log(userCredential);
-  } catch (err) {
-    // toastErrorNotify(err.message);
-  }
-};
-
-//! Login
-export const login = async (email, password, navigate) => {
-  //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
-  try {
-    let userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    navigate("/");
-    // toastSuccessNotify('Logged in successfully!');
-    // sessionStorage.setItem('user', JSON.stringify(userCredential.user));
-    console.log(userCredential);
-  } catch (err) {
-    // toastErrorNotify(err.message);
-    console.log(err);
-  }
-};
-
-//? User Observer
-export const userObserver = (setUserCheck) => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUserCheck(user);
+    console.log(displayName);
+    // console.log("Signed Up ");
+    return user;
+  } catch (error) {
+    if (error.code === "auth/email-already-in-use") {
+      console.log("The email address is already in use");
+    } else if (
+      error.code === "auth/invalid-email" ||
+      error.code === "auth/missing-email"
+    ) {
+      console.log("The email address is not valid.");
+    } else if (error.code === "auth/weak-password") {
+      console.log("Password should be at least 6 characters");
     } else {
-      // User is signed out
-      setUserCheck(false);
+      console.log(error.message);
     }
-  });
+  }
 };
 
-export const logout = () => {
-  signOut(auth);
+export const login = async (email, password, navigate) => {
+  try {
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    console.log("Logged In");
+    navigate("/");
+    return user;
+  } catch (error) {
+    if (
+      error.code === "auth/wrong-password" ||
+      error.code === "auth/invalid-email"
+    ) {
+      console.log("Your email or password is incorrect. \nPlease Try Again");
+    } else if (error.code === "auth/user-not-found") {
+      console.log("User not found.");
+    } else {
+      console.log(error.message);
+    }
+  }
 };
 
-// ! Google Register
+export const logout = async () => {
+  try {
+    await signOut(auth);
+    console.log("Logged out !");
+    return true;
+  } catch (error) {
+    // console.log(error.message);
+  }
+};
+
+const provider = new GoogleAuthProvider();
+
 export const GoogleRegister = (navigate) => {
-  const provider = new GoogleAuthProvider();
-
   signInWithPopup(auth, provider)
     .then((result) => {
-      console.log(result);
+      const user = result.user;
+      console.log("Logged In");
       navigate("/");
-      // toastSuccessNotify('Logged out successfully!');
+      return user;
     })
     .catch((error) => {
-      // Handle Errors here.
-      console.log(error);
+      if (error.code === "auth/popup-closed-by-user") {
+        console.log("Popup closed by user");
+      } else {
+        console.log(error.message);
+      }
     });
 };
 
@@ -109,12 +110,16 @@ export const forgotPassword = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
-      // toastWarnNotify("Please check your mail box!");
+      console.log("Please check your mail box!");
       // alert("Please check your mail box!");
     })
-    .catch((err) => {
-      // toastErrorNotify(err.message);
-      // alert(err.message);
-      // ..
+    .catch((error) => {
+      if (error.code === "auth/missing-email") {
+        console.log("Please enter your mail adress!");
+      } else {
+        console.log(error.message);
+      }
     });
 };
+
+export default app;

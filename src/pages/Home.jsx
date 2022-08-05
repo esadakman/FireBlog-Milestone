@@ -1,31 +1,38 @@
 // import { query } from "firebase/database";
 // import { collection, onSnapshot, orderBy } from "firebase/firestore";
 // import React, { useEffect, useState } from "react";
+import { getDatabase, onValue } from "firebase/database";
+import { useEffect, useState } from "react";
+import { ref } from "firebase/database";
 import BlogCard from "../components/BlogCard";
+import { useAuthContext } from "../contexts/AuthContext";
+import app, { db } from "../helpers/firebase";
 // import { db } from "../helpers/firebase";
 // import { toastWarn } from "../helpers/customToastify";
 
 const Home = () => {
   // toastWarn("Success !");
+  const { setData, data } = useAuthContext();
 
-  // const [articles, setArticles] = useState([]);
-  // useEffect(() => {
-  //   const articleRef = collection(db, "Articles");
-  //   const q = query(articleRef, orderBy("createdAt", "desc"));
-  //   onSnapshot(q, (snapshot) => {
-  //     const articles = snapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //     }));
-  //     setArticles(articles);
+  // Bilgi Çağırma
 
-  //     console.log(articles);
-  //   });
-  // }, []);
+  useEffect(() => {
+    onValue(ref(db), (snapshot) => {
+      setData([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((item) =>
+          setData((oldArray) => [...oldArray, item])
+        );
+      }
+    });
+  }, [setData]);
+
+  // console.log(data);
 
   return (
     <div>
-      <BlogCard /* articles={articles}  */ />
+      <BlogCard />
     </div>
   );
 };

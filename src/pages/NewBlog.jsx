@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import NewBlogStyle from "./pagesStyles/NewBlog.module.scss";
-import { getDatabase, push, ref, set } from "firebase/database";
-import app from "../helpers/firebase";
+import { push, ref, set } from "firebase/database";
+import { auth, db } from "../helpers/firebase";
 
 const NewBlog = () => {
   const { userCheck } = useAuthContext();
@@ -17,17 +17,20 @@ const NewBlog = () => {
   // Bilgi Ekleme
   const AddUser = (e) => {
     e.preventDefault();
-    const db = getDatabase(app);
     const userRef = ref(db, "blog/");
     const newUserRef = push(userRef);
     set(newUserRef, {
       title: title,
       description: description,
       imageUrl: imageUrl,
-      author: userCheck.displayName,
+      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+      createdAt: new Date().toISOString().split("T")[0],
     });
+    setTitle("");
+    setDescription("");
+    setImageUrl("");
   };
-  console.log(userCheck.displayName);
+  // console.log(auth.currentUser.displayName);
   return (
     <div className={NewBlogStyle["container"]}>
       <div className={NewBlogStyle["contactForm"]}>

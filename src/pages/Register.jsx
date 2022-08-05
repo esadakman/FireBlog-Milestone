@@ -12,9 +12,10 @@ const Register = () => {
 
   const navigate = useNavigate();
   //
+  // console.log(displayName);
   const handleSignUp = async (e) => {
-    e.preventDefault();
     const displayName = `${firstName} ${lastName}`;
+    e.preventDefault();
     if (email && password && firstName && lastName) {
       await register(email, password, displayName, navigate);
     } else {

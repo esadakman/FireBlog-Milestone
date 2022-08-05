@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { userObserver } from "../helpers/firebase";
+import { auth } from "../helpers/firebase";
 const AuthContext = createContext({});
 
 // ? consume function (kendi hook'umu oluşturarak useContext yerine kullandım)
@@ -9,14 +9,22 @@ export const useAuthContext = () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [userCheck, setUserCheck] = useState("");
+  const [data, setData] = useState([]);
   // ? Kullanıcının durumunu takip etmek için fonksiyonumu buraya yazdım ve ihtiyaç durumunda useContext sayesinde çağırdım
   useEffect(() => {
-    // setCurrentUser(JSON.parse(sessionStorage.getItem('user')));
-    userObserver(setUserCheck);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserCheck(user);
+      } else {
+        setUserCheck(false);
+      }
+    });
   }, []);
   const values = {
     userCheck,
     setUserCheck,
+    data,
+    setData,
   };
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
