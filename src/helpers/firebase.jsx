@@ -18,29 +18,30 @@ import {
 
 //! firebase console settings bölümünden firebaseconfig ayarlarını al
 const firebaseConfig = {
-  apiKey: "AIzaSyB56HxDAJ-sqHXbsRde8oO89_nUJ_AsgnI",
-  authDomain: "fireblog-daba0.firebaseapp.com",
-  projectId: "fireblog-daba0",
-  storageBucket: "fireblog-daba0.appspot.com",
-  messagingSenderId: "1069463583135",
-  appId: "1:1069463583135:web:917fbcb954dbbddec925aa",
+  apiKey: "AIzaSyCoq2qmigC3rhWN4pdPnMVGz0NlpjNjRow",
+  authDomain: "fireblog-26.firebaseapp.com",
+  databaseURL: "https://fireblog-26-default-rtdb.firebaseio.com",
+  projectId: "fireblog-26",
+  storageBucket: "fireblog-26.appspot.com",
+  messagingSenderId: "648901323570",
+  appId: "1:648901323570:web:86fbde4a50f981cd6c452b",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
+export default app;
+
+// ! Register
 export const register = async (email, password, navigate, displayName) => {
-  //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
   try {
     let userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    //? kullanıcı profilini güncellemek için kullanılan firebase metodu
     await updateProfile(auth.currentUser, {
       displayName: displayName,
     });
@@ -52,9 +53,7 @@ export const register = async (email, password, navigate, displayName) => {
   }
 };
 
-//* https://console.firebase.google.com/
-//* => Authentication => sign-in-method => enable Email/password
-//! Email/password ile girişi enable yap
+//! Login
 export const login = async (email, password, navigate) => {
   //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
   try {
@@ -73,8 +72,8 @@ export const login = async (email, password, navigate) => {
   }
 };
 
+//? User Observer
 export const userObserver = (setUserCheck) => {
-  //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUserCheck(user);
@@ -89,15 +88,10 @@ export const logout = () => {
   signOut(auth);
 };
 
-//* https://console.firebase.google.com/
-//* => Authentication => sign-in-method => enable Google
-//! Google ile girişi enable yap
-//* => Authentication => sign-in-method => Authorized domains => add domain
-//! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
+// ! Google Register
 export const GoogleRegister = (navigate) => {
-  //? Google ile giriş yapılması için kullanılan firebase metodu
   const provider = new GoogleAuthProvider();
-  //? Açılır pencere ile giriş yapılması için kullanılan firebase metodu
+
   signInWithPopup(auth, provider)
     .then((result) => {
       console.log(result);

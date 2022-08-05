@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import NewBlogStyle from "./pagesStyles/NewBlog.module.scss";
+import { getDatabase, push, ref, set } from "firebase/database";
+import app from "../helpers/firebase";
 
 const NewBlog = () => {
   const { userCheck } = useAuthContext();
@@ -10,7 +12,22 @@ const NewBlog = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
+  // console.log(userCheck);
 
+  // Bilgi Ekleme
+  const AddUser = (e) => {
+    e.preventDefault();
+    const db = getDatabase(app);
+    const userRef = ref(db, "blog/");
+    const newUserRef = push(userRef);
+    set(newUserRef, {
+      title: title,
+      description: description,
+      imageUrl: imageUrl,
+      author: userCheck.displayName,
+    });
+  };
+  console.log(userCheck.displayName);
   return (
     <div className={NewBlogStyle["container"]}>
       <div className={NewBlogStyle["contactForm"]}>
@@ -50,7 +67,9 @@ const NewBlog = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <button /* type="submit" */ value="Send">Send</button>
+            <button /* type="submit" */ value="Send" onClick={AddUser}>
+              Send
+            </button>
           </form>
         </div>
       </div>
