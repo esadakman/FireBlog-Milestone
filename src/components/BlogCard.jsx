@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BlogCardStyle from "./ComponentsStyles/BlogCard.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useBlogContext } from "../contexts/BlogContext";
@@ -19,7 +19,7 @@ const BlogCard = () => {
     } else {
       console.log("You Should Login to See Details");
     }
-    console.log(blog);
+    // console.log(blog);
   };
   return (
     <>

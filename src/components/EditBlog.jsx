@@ -20,11 +20,11 @@ const style = {
   transition: "0.5s all linear",
 };
 
-const EditBlog = () => {
+const EditBlog = ({ editData }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  console.log(editData);
   return (
     <div>
       <Button
@@ -62,6 +62,7 @@ const EditBlog = () => {
                     placeholder="Title"
                     autoFocus
                     required
+                    // value={editData.title || ""}
                   />
                   <input
                     type="text"
@@ -82,6 +83,7 @@ const EditBlog = () => {
                     label="Content"
                     type="text"
                     variant="standard"
+                    // value={editData.description || ""}
                   />
                   <button type="submit" value="Send">
                     Update

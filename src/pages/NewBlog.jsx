@@ -4,15 +4,14 @@ import { useState } from "react";
 import NewBlogStyle from "./pagesStyles/NewBlog.module.scss";
 import { push, ref, set } from "firebase/database";
 import { auth, db } from "../helpers/firebase";
+import { useNavigate } from "react-router-dom";
 
 const NewBlog = () => {
   // const { userCheck } = useAuthContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-
-  // const navigate = useNavigate();
-  // console.log(userCheck);
+  const navigate = useNavigate();
 
   // Bilgi Ekleme
   const AddUser = (e) => {
@@ -24,12 +23,18 @@ const NewBlog = () => {
       description: description,
       imageUrl: imageUrl,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
-      createdAt: new Date().toISOString().split("T")[0],
+      // createdAt: new Date().toISOString().split("T")[0],
+      createdAt: new Date().toLocaleString("en-us", {
+        month: "long",
+        year: "numeric",
+        day: "numeric",
+      }),
       likes: 0,
     });
     setTitle("");
     setDescription("");
     setImageUrl("");
+    navigate("/");
   };
   // console.log(auth.currentUser.displayName);
   return (

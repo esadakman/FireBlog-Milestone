@@ -3,17 +3,25 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@mui/material";
 import BlogStyle from "./ComponentsStyles/BlogDetails.module.scss";
 import EditBlog from "./EditBlog";
-import { useBlogContext } from "../contexts/BlogContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
+import { ref, remove } from "firebase/database";
+import { db } from "../helpers/firebase";
 
 export default function BlogDetails() {
-  const { isLoading, data } = useBlogContext();
   const { state } = useLocation();
   const { userCheck } = useAuthContext();
+  const navigate = useNavigate();
 
-  console.log(state.author.id);
-  console.log(userCheck.uid);
+  // console.log(state.id);
+  // console.log(state);
+
+  // ? DELETEContact
+  const handleDelete = (data) => {
+    remove(ref(db, `blog/` + state.id));
+    navigate("/");
+    // toastSuccess("Contact succesfully deleted");
+  };
 
   return (
     <div className={BlogStyle["container"]}>
@@ -41,10 +49,11 @@ export default function BlogDetails() {
                     minWidth: "15px !important",
                     color: "Red",
                   }}
+                  onClick={handleDelete}
                 >
                   <DeleteForeverIcon />
                 </Button>
-                <EditBlog />
+                <EditBlog editData={state} />
                 <Button
                   sx={{
                     minWidth: "15px !important",
