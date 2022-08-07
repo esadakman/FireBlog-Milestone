@@ -1,11 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BlogCardStyle from "./ComponentsStyles/BlogCard.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useBlogContext } from "../contexts/BlogContext";
+import { Button } from "@mui/material";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const BlogCard = () => {
   const { isLoading, data } = useBlogContext();
+  const { userCheck } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleDetails = () => {
+    // if (userCheck) {
+    //   navigate(`/details/${title.split(" ").join("-")}`, {
+    //     state: { id, userId, author, content, title, image, favourite, likes },
+    //   });
+    // } else {
+    //   console.log("You Should Login to See Details");
+    // }
+    console.log(title);
+  };
   return (
     <>
       <div className={BlogCardStyle["row"]}>
@@ -35,19 +50,22 @@ const BlogCard = () => {
                       {author?.name}
                     </span>
                     <h1 className={BlogCardStyle["title"]}>
-                      <Link to="/details">
+                      <p>
                         {title}
                         {/* Stranger Things: The sound of the Upside Down */}
-                      </Link>
+                      </p>
                     </h1>
                     <p className={BlogCardStyle["text"]}>
                       {/* The antsy bingers of Netflix will eagerly anticipate the
                       digital release of the Survive soundtrack, out today. */}
                       {description.slice(0, 100)}...
                     </p>
-                    <Link to="/details" className={BlogCardStyle["button"]}>
+                    <Button
+                      onClick={handleDetails}
+                      className={BlogCardStyle["button"]}
+                    >
                       Read more...
-                    </Link>
+                    </Button>
                   </div>
                 </div>
               </div>

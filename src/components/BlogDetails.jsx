@@ -3,8 +3,11 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@mui/material";
 import BlogStyle from "./ComponentsStyles/BlogDetails.module.scss";
 import EditBlog from "./EditBlog";
+import { useBlogContext } from "../contexts/BlogContext";
 
 export default function BlogDetails() {
+  const { isLoading, data } = useBlogContext();
+  console.log(data);
   return (
     <div className={BlogStyle["container"]}>
       <div className={BlogStyle["cardContainer"]}>
@@ -19,16 +22,7 @@ export default function BlogDetails() {
         <div className={BlogStyle["description"]}>
           <h3>TITLE</h3>
           <h6>Jul 30, 2022</h6>
-          <p>
-            Node.js, açık kaynaklı, genelde sunucu tarafında çalışan ve ağ
-            bağlantılı uygulamalar için geliştirilmiş bir çalıştırma ortamıdır
-            (İng. İngilizce: runtime environment). Node.js uygulamaları genelde
-            istemci tarafı betik dili olan JavaScript kullanılarak geliştirilir.
-            Node.js, Google V8 JavaScript motorunu kullanarak betik dilini
-            yorumlar ve içerisinde standart olarak dağıtılan kütüphaneler
-            sayesinde ek bir sunucu yazılımına (Apache HTTP Sunucusu, Nginx, IIS
-            vs.) gerek kalmadan uygulamanın Web sunucusu görevini görür.
-          </p>
+          <p>{data.description}</p>
         </div>
         <div className={BlogStyle["cardFooter"]}>
           <p>@esadakman </p>

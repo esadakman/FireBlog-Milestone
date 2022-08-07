@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../contexts/AuthContext";
+// import { useNavigate } from "react-router-dom";
+// import { useAuthContext } from "../contexts/AuthContext";
 import NewBlogStyle from "./pagesStyles/NewBlog.module.scss";
 import { push, ref, set } from "firebase/database";
 import { auth, db } from "../helpers/firebase";
 
 const NewBlog = () => {
-  const { userCheck } = useAuthContext();
+  // const { userCheck } = useAuthContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // console.log(userCheck);
 
   // Bilgi Ekleme

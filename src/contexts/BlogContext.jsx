@@ -1,6 +1,6 @@
 import { getDatabase, onValue, ref } from "firebase/database";
 import { createContext, useContext, useEffect, useState } from "react";
-import app, { auth } from "../helpers/firebase";
+import app from "../helpers/firebase";
 const BlogContext = createContext({});
 
 // ? consume function (kendi hook'umu oluşturarak useContext yerine kullandım)
