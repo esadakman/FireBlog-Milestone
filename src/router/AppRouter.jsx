@@ -31,7 +31,7 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/details" element={<PrivateRouter />}>
-          <Route path="/details" element={<BlogDetails />} />
+          <Route path="/details:title" element={<BlogDetails />} />
         </Route>
         <Route path="/edit" element={<EditBlog />} />
         <Route path="/newblog" element={<NewBlog />} />

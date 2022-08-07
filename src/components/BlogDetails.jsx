@@ -4,10 +4,17 @@ import { Button } from "@mui/material";
 import BlogStyle from "./ComponentsStyles/BlogDetails.module.scss";
 import EditBlog from "./EditBlog";
 import { useBlogContext } from "../contexts/BlogContext";
+import { useLocation } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export default function BlogDetails() {
   const { isLoading, data } = useBlogContext();
-  console.log(data);
+  const { state } = useLocation();
+  const { userCheck } = useAuthContext();
+
+  console.log(state.author.id);
+  console.log(userCheck.uid);
+
   return (
     <div className={BlogStyle["container"]}>
       <div className={BlogStyle["cardContainer"]}>
@@ -15,59 +22,51 @@ export default function BlogDetails() {
           <h2>──── Details ────</h2>
           <img
             // style={{ width: "30rem" }}
-            src="https://tvseriescritic.files.wordpress.com/2016/10/stranger-things-bicycle-lights-children.jpg"
+            src={state.imageUrl}
             alt="poster"
           />
         </div>
         <div className={BlogStyle["description"]}>
-          <h3>TITLE</h3>
-          <h6>Jul 30, 2022</h6>
-          <p>{data.description}</p>
+          <h3>{state.title}</h3>
+          <h6>{state.createdAt}</h6>
+          <p>{state.description}</p>
         </div>
         <div className={BlogStyle["cardFooter"]}>
-          <p>@esadakman </p>
+          <p>@{state.author.name} </p>
           <div className={BlogStyle["btnContainer"]}>
-            <Button
-              sx={{
-                minWidth: "15px !important",
-                color: "Red",
-              }}
-            >
-              <DeleteForeverIcon />
-            </Button>
-            <EditBlog />
-            <Button
-              sx={{
-                minWidth: "15px !important",
-                color: "Pink",
-              }}
-            >
-              <FavoriteBorderIcon />
-            </Button>
+            {state.author.id === userCheck.uid ? (
+              <>
+                <Button
+                  sx={{
+                    minWidth: "15px !important",
+                    color: "Red",
+                  }}
+                >
+                  <DeleteForeverIcon />
+                </Button>
+                <EditBlog />
+                <Button
+                  sx={{
+                    minWidth: "15px !important",
+                    color: "Pink",
+                  }}
+                >
+                  <FavoriteBorderIcon />
+                </Button>
+              </>
+            ) : (
+              <Button
+                sx={{
+                  minWidth: "15px !important",
+                  color: "Pink",
+                }}
+              >
+                <FavoriteBorderIcon />
+              </Button>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-// {/* <Card sx={{ width: "645px" }}>
-//         <CardActionArea>
-
-//           <CardMedia
-//             component="img"
-//             height="340"
-//             image="https://tvseriescritic.files.wordpress.com/2016/10/stranger-things-bicycle-lights-children.jpg"
-//             alt="green iguana"
-//           />
-//           <CardContent>
-//             <Typography gutterBottom variant="h5" component="div">
-//               Lizard
-//             </Typography>
-//             <Typography variant="body2" color="text.secondary">
-//               Lizards are a widespread group of squamate reptiles, with over
-//               6,000 species, ranging across all continents except Antarctica
-//             </Typography>
-//           </CardContent>
-//         </CardActionArea>
-//       </Card> */}

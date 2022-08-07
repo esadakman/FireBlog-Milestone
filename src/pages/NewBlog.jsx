@@ -25,6 +25,7 @@ const NewBlog = () => {
       imageUrl: imageUrl,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
       createdAt: new Date().toISOString().split("T")[0],
+      likes: 0,
     });
     setTitle("");
     setDescription("");
