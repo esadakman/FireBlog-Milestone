@@ -4,10 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid red 1px;
+  // border: solid red 1px;
   min-height: 90vh;
   .contactForm {
-    background-color: rgba(255, 255, 255, 0.868);
+    background-color: #050f2495;
     width: 90%;
     min-width: 20rem;
     max-width: 40rem;
@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: flex-start;
     padding-bottom: 1.5rem;
-    color: black;
+    color: white;
     border-radius: 1rem;
     transition: 0.5s all linear;
     & > h2 {

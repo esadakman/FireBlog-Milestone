@@ -14,7 +14,6 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NewBlog from "../pages/NewBlog";
 import Register from "../pages/Register";
-// import Main from "../pages/Main";
 
 const AppRouter = () => {
   const { userCheck } = useAuthContext();

@@ -2,11 +2,11 @@ import AppRouter from "./router/AppRouter";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { BlogContextProvider } from "./contexts/BlogContext";
-
+import { ToastContainer } from "react-toastify";
 const theme = createTheme({
   palette: {
-    secondary: {
-      main: "rgba(255, 255, 255, 0.1)",
+    info: {
+      main: "#050f24",
     },
   },
 });
@@ -15,6 +15,7 @@ function App() {
   return (
     <AuthContextProvider>
       <BlogContextProvider>
+        <ToastContainer />
         <ThemeProvider theme={theme}>
           <AppRouter />
         </ThemeProvider>

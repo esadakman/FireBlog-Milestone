@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { ref, update } from "firebase/database";
 import { db } from "../helpers/firebase";
+import { render } from "react-dom";
 const style = {
   position: "absolute",
   top: "50%",
@@ -26,7 +27,7 @@ const EditBlog = ({ editData }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log(editData);
+  // console.log(editData);
 
   const [newTitle, setNewTitle] = useState(editData.title);
   const [newDescription, setNewDescription] = useState(editData.description);

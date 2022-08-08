@@ -36,7 +36,7 @@ const Navbar = () => {
     // <header className="navbar">
     <AppBar
       position="static"
-      color="secondary"
+      color="info"
       // sx={{ justifyContent: "space-between" }}
     >
       <Container maxWidth="100vw">

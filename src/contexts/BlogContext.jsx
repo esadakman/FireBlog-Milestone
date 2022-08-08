@@ -29,7 +29,7 @@ export const BlogContextProvider = ({ children }) => {
   // !LIKE
   const handleLikes = (info) => {
     const like = info.likes.counter;
-    console.log(info.likes);
+    // console.log(info.likes);
     update(ref(db, `blog/` + info.id), {
       likes: { counter: like + 1, fav: true },
     });
@@ -37,7 +37,7 @@ export const BlogContextProvider = ({ children }) => {
   const handleUnlikes = (info) => {
     const like = info.likes.counter;
 
-    console.log(info.likes);
+    // console.log(info.likes);
 
     update(ref(db, `blog/` + info.id), {
       likes: { counter: like - 1, fav: false },

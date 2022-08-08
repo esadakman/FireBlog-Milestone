@@ -1,8 +1,9 @@
 @import "../../scss/mixins", "../../scss/variables";
 
 .container {
-  height: 92vh;
-  border: 1px solid red;
+  // height: 92vh;
+  // border: 1px solid red;
+  margin: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,6 +20,7 @@
     max-width: 500px;
     height: fit-content;
 
+    // background-color: rgb(85, 83, 83);
     .title {
       & > h2 {
         text-align: center;

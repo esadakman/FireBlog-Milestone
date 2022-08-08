@@ -1,4 +1,3 @@
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@mui/material";
 import BlogStyle from "./ComponentsStyles/BlogDetails.module.scss";
@@ -7,19 +6,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { ref, remove } from "firebase/database";
 import { db } from "../helpers/firebase";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useBlogContext } from "../contexts/BlogContext";
 import ReplyIcon from "@mui/icons-material/Reply";
+import { toastError } from "../helpers/customToastify";
 
 export default function BlogDetails() {
   const { state } = useLocation();
   const { userCheck } = useAuthContext();
   const navigate = useNavigate();
-  const { handleLikes, handleUnlikes } = useBlogContext();
 
   // console.log(state.id);
   // console.log(state);
-
   // ? DELETEContact
   const handleDelete = (data) => {
     remove(ref(db, `blog/` + state.id));
@@ -33,7 +30,6 @@ export default function BlogDetails() {
         <div className={BlogStyle["title"]}>
           <h2>──── Details ────</h2>
           <img
-            onClick={() => handleLikes(state)}
             // style={{ width: "30rem" }}
             src={state.imageUrl}
             alt="poster"
