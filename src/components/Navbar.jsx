@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,6 +16,8 @@ import { logout } from "../helpers/firebase";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import { setNestedObjectValues } from "formik";
+import { useEffect, useState } from "react";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -59,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -74,6 +75,21 @@ const Navbar = () => {
     e.preventDefault();
     await logout(navigate);
   };
+
+  const [search, setSearch] = useState("");
+
+
+  useEffect(() => {
+     if(search.length > 0){
+      fetch("https://fireblog-26-default-rtdb.firebaseio.com/.json").then(
+        response => response.json()
+      ).then(responseData => )
+     }
+  
+    
+  }, [third])
+  
+
   return (
     <AppBar position="static" color="info">
       <Container maxWidth="100vw">
@@ -167,6 +183,8 @@ const Navbar = () => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => setSearch(e.target.value)}
+              value={search || ""}
             />
           </Search>
           <Typography
