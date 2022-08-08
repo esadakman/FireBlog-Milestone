@@ -9,6 +9,7 @@ import { ref, remove } from "firebase/database";
 import { db } from "../helpers/firebase";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useBlogContext } from "../contexts/BlogContext";
+import ReplyIcon from "@mui/icons-material/Reply";
 
 export default function BlogDetails() {
   const { state } = useLocation();
@@ -32,6 +33,7 @@ export default function BlogDetails() {
         <div className={BlogStyle["title"]}>
           <h2>──── Details ────</h2>
           <img
+            onClick={() => handleLikes(state)}
             // style={{ width: "30rem" }}
             src={state.imageUrl}
             alt="poster"
@@ -58,33 +60,22 @@ export default function BlogDetails() {
                 </Button>
                 <EditBlog editData={state} />
                 <Button
+                  onClick={() => navigate(-1)}
                   sx={{
                     minWidth: "15px !important",
-                    color: "Pink",
                   }}
                 >
-                  <FavoriteBorderIcon />
+                  <ReplyIcon />
                 </Button>
               </>
             ) : (
               <Button
-              // sx={{
-              //   minWidth: "15px !important",
-              //   color: "Pink",
-              // }}
+                sx={{
+                  minWidth: "15px !important",
+                }}
+                onClick={() => navigate(-1)}
               >
-                {state?.likes.fav ? (
-                  <FavoriteIcon
-                    sx={{ color: "crimson" }}
-                    // onClick={() => handleUnlikes(state)}
-                    onClick={console.log(state.likes.fav)}
-                  />
-                ) : (
-                  <FavoriteBorderIcon
-                    // onClick={() => handleLikes(state)}
-                    onClick={console.log(state.likes.fav)}
-                  />
-                )}
+                <ReplyIcon />
               </Button>
             )}
           </div>

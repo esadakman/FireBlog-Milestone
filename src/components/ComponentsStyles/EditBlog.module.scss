@@ -25,7 +25,7 @@
     width: 90%;
     max-width: 35rem;
     color: black;
-    form {
+    & > div {
       display: flex;
       align-items: flex-start;
       flex-direction: column;

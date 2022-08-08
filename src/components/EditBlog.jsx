@@ -1,11 +1,13 @@
 import editStyle from "./ComponentsStyles/EditBlog.module.scss";
-import * as React from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { useState } from "react";
+import { ref, update } from "firebase/database";
+import { db } from "../helpers/firebase";
 const style = {
   position: "absolute",
   top: "50%",
@@ -21,10 +23,24 @@ const style = {
 };
 
 const EditBlog = ({ editData }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // console.log(editData);
+  console.log(editData);
+
+  const [newTitle, setNewTitle] = useState(editData.title);
+  const [newDescription, setNewDescription] = useState(editData.description);
+  const [newImageUrl, setNewImageUrl] = useState(editData.imageUrl);
+  const handleChange = () => {
+    console.log(editData.likes);
+
+    update(ref(db, `blog/` + editData.id), {
+      title: newTitle,
+      description: newDescription,
+      imageUrl: newImageUrl,
+    });
+    handleClose();
+  };
   return (
     <div>
       <Button
@@ -53,42 +69,44 @@ const EditBlog = ({ editData }) => {
             <div className={editStyle["update"]}>
               <h2>Update Blog</h2>
               <div>
-                <form /* ref={form} onSubmit={sendEmail} */>
+                <div className="form">
                   <input
                     type="text"
                     id="title"
                     label="Title"
                     variant="standard"
-                    placeholder="Title"
-                    autoFocus
+                    // placeholder="Title"
+                    // autoFocus
                     required
-                    // value={editData.title || ""}
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
                   />
                   <input
                     type="text"
                     id="image"
                     label="ImageUrl"
                     variant="standard"
-                    placeholder="Image URL"
-                    autoFocus
+                    // placeholder="Image URL"
+                    // autoFocus
                     required
+                    value={newImageUrl}
+                    onChange={(e) => setNewImageUrl(e.target.value)}
                   />
                   <textarea
                     name="message"
                     placeholder="Content"
-                    required
-                    autoFocus
-                    margin="normal"
+                    // required
+                    // autoFocus
                     id="content"
                     label="Content"
                     type="text"
                     variant="standard"
-                    // value={editData.description || ""}
+                    value={newDescription}
+                    onChange={(e) => setNewDescription(e.target.value)}
                   />
-                  <button type="submit" value="Send">
-                    Update
-                  </button>
-                </form>
+                  <button onClick={handleChange}>Update</button>
+                  <button onClick={handleClose}>Cancel Change</button>
+                </div>
               </div>
             </div>
           </Box>
