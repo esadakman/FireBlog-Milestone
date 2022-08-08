@@ -4,3 +4,18 @@
   width: auto;
   //   height: 500px;
 }
+
+div.links {
+  display: flex;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  & > li {
+    transition: all 0.3s linear;
+    &:hover {
+      background-color: #7c83933b !important;
+      border-radius: 0.2rem;
+    }
+  }
+}

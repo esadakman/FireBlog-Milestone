@@ -77,10 +77,11 @@ export const login = async (email, password, navigate) => {
   }
 };
 
-export const logout = async () => {
+export const logout = async (navigate) => {
   try {
     await signOut(auth);
-    toastError("Logged out !");
+    toastWarn("Logged out !");
+    navigate("/login");
     return true;
   } catch (error) {
     toastError(error.message);

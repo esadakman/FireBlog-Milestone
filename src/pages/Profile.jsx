@@ -1,9 +1,19 @@
 import React from "react";
-import { toastError } from "../helpers/customToastify";
+import BlogCard from "../components/BlogCard";
+import { useAuthContext } from "../contexts/AuthContext";
+import { useBlogContext } from "../contexts/BlogContext";
 
 const Profile = () => {
-  toastError("asd");
-  return <div>Profile</div>;
+  const { userCheck } = useAuthContext();
+  const { data } = useBlogContext();
+
+  let datas = data.filter((myBlog) => myBlog.author.id === userCheck.uid);
+  console.log(datas);
+  return (
+    <div>
+      <BlogCard data={datas} />
+    </div>
+  );
 };
 
 export default Profile;

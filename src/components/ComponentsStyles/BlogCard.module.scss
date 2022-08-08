@@ -2,22 +2,25 @@
 
 .row {
   max-width: 100%;
-  min-height: 92vh;
-  // border: 1px solid red;
+  min-height: 90vh;
   padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 2rem;
+  overflow: hidden;
+
   a {
     text-decoration: none;
   }
   .card {
+    border: 1px solid red;
+
     float: left;
-    padding: 0 1.7rem;
+    // padding: 0 1rem;
     width: 30%;
-    max-width: 500px;
+    max-width: 450px;
     min-width: 400px;
     .wrapper {
       background-color: $white;
@@ -150,6 +153,17 @@
           }
         }
       }
+    }
+  }
+}
+
+@include media-sm {
+  .row {
+    width: 100%;
+    div.card {
+      // width: 60%;
+      max-width: 110%;
+      min-width: 110%;
     }
   }
 }

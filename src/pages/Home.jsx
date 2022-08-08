@@ -2,7 +2,7 @@ import BlogCard from "../components/BlogCard";
 import loadingGif from "../assets/loading.svg";
 import { useBlogContext } from "../contexts/BlogContext";
 const Home = () => {
-  const { isLoading } = useBlogContext();
+  const { isLoading, data } = useBlogContext();
   return (
     <div
       style={{
@@ -12,7 +12,11 @@ const Home = () => {
         alignContent: "center",
       }}
     >
-      {isLoading ? <BlogCard /> : <img src={loadingGif} alt=""></img>}
+      {isLoading ? (
+        <BlogCard data={data} />
+      ) : (
+        <img src={loadingGif} alt=""></img>
+      )}
     </div>
   );
 };

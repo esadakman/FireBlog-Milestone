@@ -34,7 +34,9 @@ const AppRouter = () => {
           <Route path="/details:title" element={<BlogDetails />} />
         </Route>
         <Route path="/edit" element={<EditBlog />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<PrivateRouter />}>
+          <Route path="/profile:displayName" element={<Profile />} />
+        </Route>
         <Route path="/newblog" element={<NewBlog />} />
       </Routes>
       <Footer />

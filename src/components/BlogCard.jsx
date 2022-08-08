@@ -7,8 +7,8 @@ import { Button } from "@mui/material";
 import { useAuthContext } from "../contexts/AuthContext";
 import { toastWarn } from "../helpers/customToastify";
 
-const BlogCard = () => {
-  const { handleLikes, handleUnlikes, data } = useBlogContext();
+const BlogCard = ({ data }) => {
+  const { handleLikes, handleUnlikes } = useBlogContext();
   const { userCheck } = useAuthContext();
   const navigate = useNavigate();
 
@@ -58,10 +58,10 @@ const BlogCard = () => {
                     @{blog.author?.name.toLowerCase().replace(/\s/g, "")}
                   </span>
                   <h1 className={BlogCardStyle["title"]}>
-                    <p>{blog.title}</p>
+                    <p>{blog.title.slice(0, 25)}</p>
                   </h1>
                   <p className={BlogCardStyle["text"]}>
-                    {blog.description.slice(0, 120)}...
+                    {blog.description.slice(0, 130)}...
                   </p>
                   <Button
                     onClick={() => handleDetails(blog)}

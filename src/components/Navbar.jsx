@@ -14,39 +14,68 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import "./ComponentsStyles/Navbar.scss";
 import { useAuthContext } from "../contexts/AuthContext";
 import { logout } from "../helpers/firebase";
-import { toastWarn } from "../helpers/customToastify";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  // maxWidth: "13rem",
+  [theme.breakpoints.up("sm")]: {
+    // marginLeft: theme.spacing(3),
+    // width: "auto",
+    maxWidth: "13rem",
+
+    marginLeft: 0,
+  },
+}));
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "10rem",
+    },
+  },
+}));
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
-  const { userCheck } = useAuthContext();
-  const navigate = useNavigate();
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleProfile = () => {
-    // if (userCheck) {
-    //   navigate(`/profile/${userCheck.displayName}`, {
-    //     state: userCheck.uid,
-    //   });
-    // } else {
-    //   toastWarn("You Should Login to See Details");
-    // }
-    // navigate(`/profile/${userCheck.displayName}`);
-    console.log(userCheck.uid);
+  const { userCheck } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogOut = async (e) => {
+    e.preventDefault();
+    await logout(navigate);
   };
   return (
-    // <header className="navbar">
-    <AppBar
-      position="static"
-      color="info"
-      // sx={{ justifyContent: "space-between" }}
-    >
+    <AppBar position="static" color="info">
       <Container maxWidth="100vw">
         <Toolbar disableGutters>
           <Typography
@@ -61,6 +90,7 @@ const Navbar = () => {
           >
             <img src={logo} alt="logo" width="35rem" />
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -92,6 +122,13 @@ const Navbar = () => {
             >
               {userCheck ? (
                 <div>
+                  <MenuItem
+                    onClick={() => {
+                      navigate(`/profile/${userCheck.displayName}`);
+                    }}
+                  >
+                    My Profile
+                  </MenuItem>
                   <MenuItem component={RouterLink} to="/">
                     Home
                   </MenuItem>
@@ -116,17 +153,22 @@ const Navbar = () => {
                     Login
                   </MenuItem>
 
-                  <MenuItem
-                    component={RouterLink}
-                    to="/register"
-                    // onClick={logOutCleaner}
-                  >
+                  <MenuItem component={RouterLink} to="/register">
                     Register
                   </MenuItem>
                 </div>
               )}
             </Menu>
           </Box>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
           <Typography
             variant="link"
             noWrap
@@ -154,50 +196,35 @@ const Navbar = () => {
             }}
           >
             {userCheck ? (
-              <div sx={{ display: "flex" }}>
-                <Button
-                  className="mb-0 text-capitalize"
-                  sx={{
-                    color: "white",
-                    "&:hover": {
-                      color: "white",
-                      pointerEvents: "none !important",
-                    },
+              <div sx={{ display: "flex" }} className="links">
+                <MenuItem
+                  onClick={() => {
+                    navigate(`/profile/${userCheck.displayName}`);
                   }}
-                  variant="link"
-                  component={RouterLink}
-                  to="/profile"
-                  // onClick={handleProfile}
                 >
                   {userCheck.displayName}
-                </Button>
-                <Button
+                </MenuItem>
+                <MenuItem
                   sx={{ color: "white" }}
-                  variant="link"
-                  component={RouterLink}
-                  to="/"
+                  onClick={() => {
+                    navigate("/");
+                  }}
                 >
                   Home
-                </Button>
+                </MenuItem>
 
-                <Button
+                <MenuItem
                   sx={{ color: "white" }}
-                  variant="link"
-                  component={RouterLink}
-                  to="/newblog"
+                  onClick={() => {
+                    navigate("/newblog");
+                  }}
                 >
                   New Blog
-                </Button>
+                </MenuItem>
 
-                <Button
-                  sx={{ color: "white" }}
-                  variant="link"
-                  component={RouterLink}
-                  to="/login"
-                  onClick={logout}
-                >
+                <MenuItem sx={{ color: "white" }} onClick={handleLogOut}>
                   Logout
-                </Button>
+                </MenuItem>
               </div>
             ) : (
               <div>
