@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { BlogContextProvider } from "./contexts/BlogContext";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const theme = createTheme({
   palette: {
     info: {

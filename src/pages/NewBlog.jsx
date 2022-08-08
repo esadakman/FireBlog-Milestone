@@ -14,27 +14,34 @@ const NewBlog = () => {
   const navigate = useNavigate();
 
   // Bilgi Ekleme
-  const AddUser = (e) => {
+  const AddBlog = (e) => {
     e.preventDefault();
-    const userRef = ref(db, "blog/");
-    const newUserRef = push(userRef);
-    set(newUserRef, {
-      title: title,
-      description: description,
-      imageUrl: imageUrl,
-      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
-      // createdAt: new Date().toISOString().split("T")[0],
-      createdAt: new Date().toLocaleString("en-us", {
-        month: "long",
-        year: "numeric",
-        day: "numeric",
-      }),
-      likes: { counter: 0, fav: false },
-    });
-    setTitle("");
-    setDescription("");
-    setImageUrl("");
-    navigate("/");
+    if (title && description && imageUrl) {
+      const userRef = ref(db, "blog/");
+      const newUserRef = push(userRef);
+      set(newUserRef, {
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        author: {
+          name: auth.currentUser.displayName,
+          id: auth.currentUser.uid,
+        },
+        // createdAt: new Date().toISOString().split("T")[0],
+        createdAt: new Date().toLocaleString("en-us", {
+          month: "long",
+          year: "numeric",
+          day: "numeric",
+        }),
+        likes: { counter: 0, fav: false },
+      });
+      setTitle("");
+      setDescription("");
+      setImageUrl("");
+      navigate("/");
+    } else {
+      console.log("Please fill out all fields.");
+    }
   };
   // console.log(auth.currentUser.displayName);
   return (
@@ -49,6 +56,7 @@ const NewBlog = () => {
               label="Title"
               placeholder="Title"
               required
+              autoFocus
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -57,7 +65,7 @@ const NewBlog = () => {
               id="image"
               label="ImageUrl"
               placeholder="Image URL"
-              // required
+              required
               type="text"
               name="image"
               className="form-control"
@@ -67,7 +75,7 @@ const NewBlog = () => {
             <textarea
               placeholder="Content"
               // required
-              autoFocus
+              // autoFocus
               margin="normal"
               id="content"
               label="Content"
@@ -76,7 +84,7 @@ const NewBlog = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <button /* type="submit" */ value="Send" onClick={AddUser}>
+            <button /* type="submit" */ value="Send" onClick={AddBlog}>
               Send
             </button>
           </form>

@@ -9,7 +9,7 @@ export const useBlogContext = () => {
 };
 
 export const BlogContextProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState();
   // ! REad
   useEffect(() => {
@@ -23,7 +23,7 @@ export const BlogContextProvider = ({ children }) => {
         userArray.push({ id, ...data[id] });
       }
       setData(userArray);
-      setIsLoading(false);
+      setIsLoading(true);
     });
   }, []);
   // !LIKE
@@ -36,9 +36,6 @@ export const BlogContextProvider = ({ children }) => {
   };
   const handleUnlikes = (info) => {
     const like = info.likes.counter;
-
-    // console.log(info.likes);
-
     update(ref(db, `blog/` + info.id), {
       likes: { counter: like - 1, fav: false },
     });

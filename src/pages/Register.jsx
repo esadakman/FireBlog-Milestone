@@ -14,6 +14,7 @@ import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { GoogleRegister, register } from "../helpers/firebase";
 import GoogleIcon from "@mui/icons-material/Google";
+import { toastWarn } from "../helpers/customToastify";
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -29,14 +30,14 @@ const Register = () => {
     if (email && password && firstName && lastName) {
       await register(email, password, displayName, navigate);
     } else {
-      console.log("Please fill out all fields.");
+      toastWarn("Please fill out all fields.");
     }
   };
   return (
     <Grid
       container
       component="main"
-      sx={{ height: { xs: "91vh", sm: "90vh" } }}
+      sx={{ height: { xs: "92vh", sm: "91vh" } }}
     >
       <CssBaseline />
       <Grid

@@ -13,6 +13,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NewBlog from "../pages/NewBlog";
+import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 
 const AppRouter = () => {
@@ -33,6 +34,7 @@ const AppRouter = () => {
           <Route path="/details:title" element={<BlogDetails />} />
         </Route>
         <Route path="/edit" element={<EditBlog />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/newblog" element={<NewBlog />} />
       </Routes>
       <Footer />

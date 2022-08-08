@@ -1,13 +1,18 @@
 import BlogCard from "../components/BlogCard";
-
+import loadingGif from "../assets/loading.svg";
+import { useBlogContext } from "../contexts/BlogContext";
 const Home = () => {
-  // toastWarn("Success !");
-
-  // console.log(data);
-
+  const { isLoading } = useBlogContext();
   return (
-    <div>
-      <BlogCard />
+    <div
+      style={{
+        display: "flex",
+        minHeight: "90vh",
+        justifyContent: "center",
+        alignContent: "center",
+      }}
+    >
+      {isLoading ? <BlogCard /> : <img src={loadingGif} alt=""></img>}
     </div>
   );
 };

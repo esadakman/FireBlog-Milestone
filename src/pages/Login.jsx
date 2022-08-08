@@ -27,7 +27,6 @@ const Login = () => {
       await login(email, password, navigate);
     } else {
       toastWarn("Please fill out all fields.");
-      console.log("asd");
     }
   };
 
@@ -35,7 +34,7 @@ const Login = () => {
     <Grid
       container
       component="main"
-      sx={{ height: { xs: "91vh", sm: "90vh" } }}
+      sx={{ height: { xs: "92vh", sm: "91vh" } }}
     >
       <CssBaseline />
       <Grid

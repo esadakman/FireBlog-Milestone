@@ -8,7 +8,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { ref, update } from "firebase/database";
 import { db } from "../helpers/firebase";
-import { render } from "react-dom";
+import { toastSuccess } from "../helpers/customToastify";
+import { useNavigate } from "react-router-dom";
 const style = {
   position: "absolute",
   top: "50%",
@@ -16,7 +17,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: { xs: "80%", md: "50%", lg: "42%" },
   height: "fit-content",
-  // bgcolor: "rgba(255, 255, 255, 0.916)",
   border: "2px solid #000",
   boxShadow: 24,
   borderRadius: "1rem",
@@ -27,13 +27,13 @@ const EditBlog = ({ editData }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // console.log(editData);
+  const navigate = useNavigate();
 
   const [newTitle, setNewTitle] = useState(editData.title);
   const [newDescription, setNewDescription] = useState(editData.description);
   const [newImageUrl, setNewImageUrl] = useState(editData.imageUrl);
-  const handleChange = () => {
-    console.log(editData.likes);
+  const handleUpdate = () => {
+    // console.log(editData.likes);
 
     update(ref(db, `blog/` + editData.id), {
       title: newTitle,
@@ -41,6 +41,8 @@ const EditBlog = ({ editData }) => {
       imageUrl: newImageUrl,
     });
     handleClose();
+    toastSuccess("Your blog has been successfully updated");
+    navigate("/");
   };
   return (
     <div>
@@ -76,7 +78,7 @@ const EditBlog = ({ editData }) => {
                     id="title"
                     label="Title"
                     variant="standard"
-                    // placeholder="Title"
+                    placeholder="Title"
                     // autoFocus
                     required
                     value={newTitle}
@@ -87,7 +89,7 @@ const EditBlog = ({ editData }) => {
                     id="image"
                     label="ImageUrl"
                     variant="standard"
-                    // placeholder="Image URL"
+                    placeholder="Image URL"
                     // autoFocus
                     required
                     value={newImageUrl}
@@ -96,7 +98,7 @@ const EditBlog = ({ editData }) => {
                   <textarea
                     name="message"
                     placeholder="Content"
-                    // required
+                    required
                     // autoFocus
                     id="content"
                     label="Content"
@@ -105,7 +107,7 @@ const EditBlog = ({ editData }) => {
                     value={newDescription}
                     onChange={(e) => setNewDescription(e.target.value)}
                   />
-                  <button onClick={handleChange}>Update</button>
+                  <button onClick={handleUpdate}>Update</button>
                   <button onClick={handleClose}>Cancel Change</button>
                 </div>
               </div>

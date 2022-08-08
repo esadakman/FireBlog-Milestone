@@ -1,9 +1,9 @@
 @import "../../scss/mixins", "../../scss/variables";
 
 .container {
-  // height: 92vh;
+  min-height: 91vh;
   // border: 1px solid red;
-  margin: 0.5rem;
+  // margin: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +28,7 @@
       }
       & > img {
         width: 100%;
-        // height: 20rem;
+        // max-height: 30rem;
       }
     }
   }

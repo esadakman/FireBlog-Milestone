@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { toastError, toastSuccess, toastWarn } from "./customToastify";
 
 //! firebase console settings bölümünden firebaseconfig ayarlarını al
 const firebaseConfig = {
@@ -38,20 +39,20 @@ export const register = async (email, password, displayName, navigate) => {
     await updateProfile(auth.currentUser, { displayName: displayName });
     navigate("/");
     console.log(displayName);
-    // console.log("Signed Up ");
+    toastSuccess("Signed Up ");
     return user;
   } catch (error) {
     if (error.code === "auth/email-already-in-use") {
-      console.log("The email address is already in use");
+      toastError("The email address is already in use");
     } else if (
       error.code === "auth/invalid-email" ||
       error.code === "auth/missing-email"
     ) {
-      console.log("The email address is not valid.");
+      toastWarn("The email address is not valid.");
     } else if (error.code === "auth/weak-password") {
-      console.log("Password should be at least 6 characters");
+      toastWarn("Password should be at least 6 characters");
     } else {
-      console.log(error.message);
+      toastError(error.message);
     }
   }
 };
@@ -59,7 +60,7 @@ export const register = async (email, password, displayName, navigate) => {
 export const login = async (email, password, navigate) => {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-    console.log("Logged In");
+    toastSuccess("Logged In");
     navigate("/");
     return user;
   } catch (error) {
@@ -67,11 +68,11 @@ export const login = async (email, password, navigate) => {
       error.code === "auth/wrong-password" ||
       error.code === "auth/invalid-email"
     ) {
-      console.log("Your email or password is incorrect. \nPlease Try Again");
+      toastWarn("Your email or password is incorrect. \nPlease Try Again");
     } else if (error.code === "auth/user-not-found") {
-      console.log("User not found.");
+      toastWarn("User not found.");
     } else {
-      console.log(error.message);
+      toastError(error.message);
     }
   }
 };
@@ -79,10 +80,10 @@ export const login = async (email, password, navigate) => {
 export const logout = async () => {
   try {
     await signOut(auth);
-    console.log("Logged out !");
+    toastError("Logged out !");
     return true;
   } catch (error) {
-    // console.log(error.message);
+    toastError(error.message);
   }
 };
 
@@ -92,7 +93,7 @@ export const GoogleRegister = (navigate) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
-      console.log("Logged In");
+      toastSuccess("Logged In");
       navigate("/");
       return user;
     })
@@ -100,7 +101,7 @@ export const GoogleRegister = (navigate) => {
       if (error.code === "auth/popup-closed-by-user") {
         console.log("Popup closed by user");
       } else {
-        console.log(error.message);
+        toastError(error.message);
       }
     });
 };
@@ -115,9 +116,9 @@ export const forgotPassword = (email) => {
     })
     .catch((error) => {
       if (error.code === "auth/missing-email") {
-        console.log("Please enter your mail adress!");
+        toastWarn("Please enter your mail adress!");
       } else {
-        console.log(error.message);
+        toastError(error.message);
       }
     });
 };

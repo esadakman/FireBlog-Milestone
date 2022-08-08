@@ -6,9 +6,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { ref, remove } from "firebase/database";
 import { db } from "../helpers/firebase";
-import { useBlogContext } from "../contexts/BlogContext";
 import ReplyIcon from "@mui/icons-material/Reply";
-import { toastError } from "../helpers/customToastify";
+import notFound from "../assets/not-found.png";
+import { toastSuccess } from "../helpers/customToastify";
 
 export default function BlogDetails() {
   const { state } = useLocation();
@@ -21,19 +21,17 @@ export default function BlogDetails() {
   const handleDelete = (data) => {
     remove(ref(db, `blog/` + state.id));
     navigate("/");
-    // toastSuccess("Contact succesfully deleted");
+    toastSuccess("Your blog succesfully deleted");
   };
-
+  const getImageError = (e) => {
+    e.currentTarget.src = notFound;
+  };
   return (
     <div className={BlogStyle["container"]}>
       <div className={BlogStyle["cardContainer"]}>
         <div className={BlogStyle["title"]}>
           <h2>──── Details ────</h2>
-          <img
-            // style={{ width: "30rem" }}
-            src={state.imageUrl}
-            alt="poster"
-          />
+          <img src={state?.imageUrl} onError={getImageError} alt="poster" />
         </div>
         <div className={BlogStyle["description"]}>
           <h3>{state.title}</h3>
@@ -70,6 +68,7 @@ export default function BlogDetails() {
                   minWidth: "15px !important",
                 }}
                 onClick={() => navigate(-1)}
+                title={"Go Back"}
               >
                 <ReplyIcon />
               </Button>

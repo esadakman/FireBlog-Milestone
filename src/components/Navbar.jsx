@@ -10,10 +10,11 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/logo.png";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import "./ComponentsStyles/Navbar.scss";
 import { useAuthContext } from "../contexts/AuthContext";
 import { logout } from "../helpers/firebase";
+import { toastWarn } from "../helpers/customToastify";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -22,16 +23,23 @@ const Navbar = () => {
   };
 
   const { userCheck } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  // const logOutCleaner = () => {
-  //   sessionStorage.clear();
-  //   localStorage.clear();
-  // };
-  // console.log(userCheck.displayName);
+  const handleProfile = () => {
+    // if (userCheck) {
+    //   navigate(`/profile/${userCheck.displayName}`, {
+    //     state: userCheck.uid,
+    //   });
+    // } else {
+    //   toastWarn("You Should Login to See Details");
+    // }
+    // navigate(`/profile/${userCheck.displayName}`);
+    console.log(userCheck.uid);
+  };
   return (
     // <header className="navbar">
     <AppBar
@@ -156,6 +164,10 @@ const Navbar = () => {
                       pointerEvents: "none !important",
                     },
                   }}
+                  variant="link"
+                  component={RouterLink}
+                  to="/profile"
+                  // onClick={handleProfile}
                 >
                   {userCheck.displayName}
                 </Button>
