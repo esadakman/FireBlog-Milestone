@@ -24,7 +24,7 @@ const EditBlog = ({ editData }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log(editData);
+  // console.log(editData);
   return (
     <div>
       <Button

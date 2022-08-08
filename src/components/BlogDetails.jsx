@@ -7,11 +7,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import { ref, remove } from "firebase/database";
 import { db } from "../helpers/firebase";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useBlogContext } from "../contexts/BlogContext";
 
 export default function BlogDetails() {
   const { state } = useLocation();
   const { userCheck } = useAuthContext();
   const navigate = useNavigate();
+  const { handleLikes, handleUnlikes } = useBlogContext();
 
   // console.log(state.id);
   // console.log(state);
@@ -40,7 +43,7 @@ export default function BlogDetails() {
           <p>{state.description}</p>
         </div>
         <div className={BlogStyle["cardFooter"]}>
-          <p>@{state.author.name} </p>
+          <p>@{state.author?.name?.toLowerCase().replace(/\s/g, "")} </p>
           <div className={BlogStyle["btnContainer"]}>
             {state.author.id === userCheck.uid ? (
               <>
@@ -65,12 +68,23 @@ export default function BlogDetails() {
               </>
             ) : (
               <Button
-                sx={{
-                  minWidth: "15px !important",
-                  color: "Pink",
-                }}
+              // sx={{
+              //   minWidth: "15px !important",
+              //   color: "Pink",
+              // }}
               >
-                <FavoriteBorderIcon />
+                {state?.likes.fav ? (
+                  <FavoriteIcon
+                    sx={{ color: "crimson" }}
+                    // onClick={() => handleUnlikes(state)}
+                    onClick={console.log(state.likes.fav)}
+                  />
+                ) : (
+                  <FavoriteBorderIcon
+                    // onClick={() => handleLikes(state)}
+                    onClick={console.log(state.likes.fav)}
+                  />
+                )}
               </Button>
             )}
           </div>

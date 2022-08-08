@@ -29,7 +29,7 @@ const NewBlog = () => {
         year: "numeric",
         day: "numeric",
       }),
-      likes: 0,
+      likes: { counter: 0, fav: false },
     });
     setTitle("");
     setDescription("");
