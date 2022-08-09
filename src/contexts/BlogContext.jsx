@@ -1,6 +1,5 @@
 import { getDatabase, onValue, ref, update } from "firebase/database";
 import { createContext, useContext, useEffect, useState } from "react";
-import { toastWarn } from "../helpers/customToastify";
 import app, { auth, db } from "../helpers/firebase";
 const BlogContext = createContext({});
 
@@ -30,12 +29,12 @@ export const BlogContextProvider = ({ children }) => {
   // !LIKE
   const handleLikes = (info) => {
     const like = info.likes;
-    // console.log(info.likes);
-    // if (Object.values(info.likes).includes(auth.currentUser.uid)) {
     if (Object.values(info.fav).includes(auth.currentUser.uid)) {
-      // console.log(auth.currentUser.displayName);
-
-      toastWarn("You already liked this content");
+      update(ref(db, `blog/` + info.id), {
+        ...info,
+        likes: like - 1,
+        fav: info.fav.filter((unlike) => unlike !== auth.currentUser.uid),
+      });
     } else {
       update(ref(db, `blog/` + info.id), {
         ...info,
@@ -43,17 +42,6 @@ export const BlogContextProvider = ({ children }) => {
         fav: [...info.fav, auth.currentUser.uid],
       });
     }
-    // else {
-    //   update(ref(db, `blog/` + info.id), {
-    //     likes: like - 1,
-    //   });
-    // }
-  };
-  const handleUnlikes = (info) => {
-    const like = info.likes.counter;
-    // update(ref(db, `blog/` + info.id), {
-    //   likes: { counter: like - 1, fav: false },
-    // });
   };
 
   const values = {
@@ -62,7 +50,6 @@ export const BlogContextProvider = ({ children }) => {
     data,
     setData,
     handleLikes,
-    handleUnlikes,
   };
   return <BlogContext.Provider value={values}>{children}</BlogContext.Provider>;
 };

@@ -6,9 +6,7 @@ import { useBlogContext } from "../contexts/BlogContext";
 import { Button } from "@mui/material";
 import { useAuthContext } from "../contexts/AuthContext";
 import { toastWarn } from "../helpers/customToastify";
-import { update } from "firebase/database";
-import { ref } from "yup";
-import { auth, db } from "../helpers/firebase";
+import { auth } from "../helpers/firebase";
 
 const BlogCard = ({ data }) => {
   const { handleLikes } = useBlogContext();
@@ -21,12 +19,8 @@ const BlogCard = ({ data }) => {
         state: blog,
       });
     } else {
-      toastWarn("You Should Login to See Details");
-      // update(ref(db, `blog/`), {
-      //   likes: { fav: false },
-      // });
+      toastWarn("You should login to see details");
     }
-    // console.log(blog);
   };
 
   const likeCheck = (blog) => {
@@ -53,7 +47,7 @@ const BlogCard = ({ data }) => {
                 <ul className={BlogCardStyle["menu-content"]}>
                   <li style={{ transition: " all 2s linear" }}>
                     {/* {blog?.likes > 0 ? ( */}
-                    {blog?.fav.includes(auth.currentUser.uid) ? (
+                    {blog?.fav.includes(auth.currentUser?.uid) ? (
                       <FavoriteIcon
                         sx={{ color: "crimson" }}
                         onClick={() => likeCheck(blog)}
@@ -74,7 +68,7 @@ const BlogCard = ({ data }) => {
                     @{blog.author?.name.toLowerCase().replace(/\s/g, "")}
                   </span>
                   <h1 className={BlogCardStyle["title"]}>
-                    <p>{blog.title.slice(0, 25)}</p>
+                    <p>{blog.title.slice(0, 24)}</p>
                   </h1>
                   <p className={BlogCardStyle["text"]}>
                     {blog.description.slice(0, 130)}...

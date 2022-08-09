@@ -7,19 +7,17 @@ const Home = () => {
   const { isLoading, data } = useBlogContext();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        minHeight: "90vh",
-        justifyContent: "center",
-        alignContent: "center",
-      }}
-    >
-      <div className={HomeStyle["searchContainer"]}></div>
+    <div className={HomeStyle["container"]}>
+      <div className={HomeStyle["searchContainer"]}>
+        <form className={HomeStyle["formContainer"]}>
+          <input type="text" placeholder="Search for a post ..." />
+          <button>Search</button>
+        </form>
+      </div>
       {isLoading ? (
         <BlogCard data={data} />
       ) : (
-        <img src={loadingGif} alt=""></img>
+        <img src={loadingGif} /* style={{ width: "5rem" }}  */ alt=""></img>
       )}
     </div>
   );
