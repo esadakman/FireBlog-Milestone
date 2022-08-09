@@ -34,7 +34,7 @@ const Login = () => {
     <Grid
       container
       component="main"
-      sx={{ height: { xs: "92vh", sm: "91vh" } }}
+      sx={{ height: { xs: "84.2vh", sm: "83vh" } }}
     >
       <CssBaseline />
       <Grid

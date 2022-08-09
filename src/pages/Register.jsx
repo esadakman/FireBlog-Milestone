@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { GoogleRegister, register } from "../helpers/firebase";
 import GoogleIcon from "@mui/icons-material/Google";
 import { toastWarn } from "../helpers/customToastify";
+import { Formik } from "formik";
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -37,7 +38,7 @@ const Register = () => {
     <Grid
       container
       component="main"
-      sx={{ height: { xs: "92vh", sm: "91vh" } }}
+      sx={{ height: { xs: "84.2vh", sm: "83vh" } }}
     >
       <CssBaseline />
       <Grid
@@ -87,6 +88,8 @@ const Register = () => {
               onSubmit={handleSignUp}
               sx={{ mt: 1 }}
             >
+              {/* //! FORMİK============== */}
+              {/* <Formik> */}
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -147,6 +150,9 @@ const Register = () => {
               >
                 Sign Up
               </Button>
+              {/* </Formik> */}
+              {/* //! FORMİK============== */}
+
               <div style={{ marginBottom: "1rem" }}>
                 <Button
                   variant="contained"

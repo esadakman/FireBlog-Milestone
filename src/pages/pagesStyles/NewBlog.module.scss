@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   // border: solid red 1px;
-  min-height: 90vh;
+  min-height: 83vh;
   .contactForm {
     background-color: #050f2495;
     width: 90%;
@@ -100,5 +100,11 @@
         }
       }
     }
+  }
+}
+
+@include media-smp {
+  .container {
+    height: 84.2vh;
   }
 }
