@@ -14,21 +14,24 @@ body {
   background-color: #e1e6fa;
 }
 
-::-webkit-scrollbar-track {
-  border: 5px solid white;
-  // border color does not support transparent on scrollbar
-  // border-color: transparent;
-  background-color: #b2bec3;
+::-webkit-scrollbar {
+  width: 0.6rem;
+  height: 0.6rem;
 }
 
-::-webkit-scrollbar {
-  width: 13px;
-  background-color: #dfe6e9;
+::-webkit-scrollbar-track {
+  // border-radius: 10px;
+  // background: rgba(0, 0, 0, 0.1);
+  background: $cardNavBgColor;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $san-juan;
-  border-radius: 8px;
+  border-radius: 5px;
+  background: $turqo;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $turqo;
 }
 
 input:-webkit-autofill,
