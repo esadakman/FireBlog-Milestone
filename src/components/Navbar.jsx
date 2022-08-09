@@ -141,36 +141,21 @@ const Navbar = () => {
                   <MenuItem
                     component={RouterLink}
                     to="/register"
-                    onClick={() => {
-                      logout();
-                      setSearch("");
-                    }}
+                    onClick={handleLogOut}
                   >
                     Log Out
                   </MenuItem>
                 </div>
               ) : (
                 <div>
-                  <MenuItem
-                    component={RouterLink}
-                    to="/"
-                    // onClick={() => setSearch("")}
-                  >
+                  <MenuItem component={RouterLink} to="/">
                     Home
                   </MenuItem>
-                  <MenuItem
-                    component={RouterLink}
-                    to="/login"
-                    // onClick={() => setSearch("")}
-                  >
+                  <MenuItem component={RouterLink} to="/login">
                     Login
                   </MenuItem>
 
-                  <MenuItem
-                    component={RouterLink}
-                    to="/register"
-                    // onClick={() => setSearch("")}
-                  >
+                  <MenuItem component={RouterLink} to="/register">
                     Register
                   </MenuItem>
                 </div>
@@ -179,7 +164,7 @@ const Navbar = () => {
           </Box>
           <Search
             sx={{
-              maxWidth: { xs: "12rem", md: "15rem" /* md: "45%" */ },
+              maxWidth: { xs: "12rem", sm: "15rem", md: "18rem" },
               // height: { sm: "10rem" },
             }}
           >

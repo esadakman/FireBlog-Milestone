@@ -20,7 +20,7 @@ const AppRouter = () => {
   const { userCheck } = useAuthContext();
 
   function PrivateRouter() {
-    return userCheck ? <Outlet /> : <Navigate to="/login" replace />;
+    return userCheck ? <Outlet /> : <Navigate to="/" replace />;
   }
 
   return (

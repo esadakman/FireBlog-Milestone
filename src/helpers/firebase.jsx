@@ -85,6 +85,7 @@ export const logout = async (navigate) => {
     return true;
   } catch (error) {
     toastError(error.message);
+    toastSuccess("asddd");
   }
 };
 

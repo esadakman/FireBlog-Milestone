@@ -2,6 +2,7 @@ import BlogCard from "../components/BlogCard";
 import loadingGif from "../assets/loading.svg";
 import { useBlogContext } from "../contexts/BlogContext";
 import HomeStyle from "./pagesStyles/Home.module.scss";
+import NotFound from "../components/NotFound";
 
 const Home = () => {
   const { isLoading, data, search } = useBlogContext();
@@ -11,16 +12,14 @@ const Home = () => {
       param.title.toLowerCase().includes(search.toLowerCase())
     );
   }
-  // {homeData.length > 0 ? <BlogCard data={homeData} /> : <NotFound />}
-  console.log(homeData);
   return (
     <div className={HomeStyle["container"]}>
       {isLoading ? (
-        <BlogCard data={homeData} />
+        <>
+          {homeData?.length > 0 ? <BlogCard data={homeData} /> : <NotFound />}
+        </>
       ) : (
-        // {homeData.length > 0 ? <BlogCard data={homeData} /> : <NotFound />}
-
-        <img src={loadingGif} alt="loading Gif"></img>
+        <img src={loadingGif} alt="Loading Gif" />
       )}
     </div>
   );
