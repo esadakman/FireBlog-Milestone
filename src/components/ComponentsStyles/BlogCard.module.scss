@@ -21,8 +21,8 @@
     float: left;
     // padding: 0 1rem;
     width: 30%;
-    max-width: 450px;
-    min-width: 400px;
+    max-width: 350px;
+    min-width: 300px;
     .wrapper {
       background-color: $white;
       min-height: 400px;
@@ -113,9 +113,10 @@
           }
           .title {
             margin-bottom: 10px;
+            overflow: hidden;
           }
           .text {
-            height: 80px;
+            height: 75px;
             margin: 0;
             font-weight: 600;
           }
@@ -127,9 +128,11 @@
         }
       }
       .button {
+        z-index: 3;
         display: block;
         width: 140px;
         margin: auto;
+        margin-top: 10px;
         padding: 1rem 10px;
         border-radius: 0.5rem;
         text-align: center;
@@ -161,9 +164,9 @@
   }
 }
 
-@include media-sm {
+@include media-md {
   .row {
-    width: 100%;
+    width: 80%;
     div.card {
       // width: 60%;
       max-width: 100%;

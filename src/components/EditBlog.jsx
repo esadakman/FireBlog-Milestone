@@ -8,7 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { ref, update } from "firebase/database";
 import { db } from "../helpers/firebase";
-import { toastSuccess } from "../helpers/customToastify";
+import { toastSuccess, toastWarn } from "../helpers/customToastify";
 import { useNavigate } from "react-router-dom";
 const style = {
   position: "absolute",
@@ -44,6 +44,10 @@ const EditBlog = ({ editData }) => {
     toastSuccess("Your blog has been successfully updated");
     navigate("/");
   };
+
+  if (newTitle.length > 20) {
+    toastWarn("Title must be at most 20 characters");
+  }
   return (
     <div>
       <Button
@@ -80,6 +84,7 @@ const EditBlog = ({ editData }) => {
                     variant="standard"
                     placeholder="Title"
                     // autoFocus
+                    maxLength={20}
                     required
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}

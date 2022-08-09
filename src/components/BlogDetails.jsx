@@ -18,10 +18,10 @@ export default function BlogDetails() {
   // console.log(state.id);
   // console.log(state);
   // ? DELETEContact
-  const handleDelete = (data) => {
+  const handleDelete = () => {
     remove(ref(db, `blog/` + state.id));
     navigate("/");
-    toastSuccess("Your blog succesfully deleted");
+    toastSuccess("Your post has been succesfully deleted");
   };
   const getImageError = (e) => {
     e.currentTarget.src = notFound;

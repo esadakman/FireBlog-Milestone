@@ -1,12 +1,12 @@
 import { Button, Grid, Link } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { toastWarn } from "../../../helpers/customToastify";
+import { toastWarn } from "./../../helpers/customToastify";
 import {
   forgotPassword,
   GoogleRegister,
   login,
-} from "../../../helpers/firebase";
+} from "./../../helpers/firebase";
 import GoogleIcon from "@mui/icons-material/Google";
 
 const LoginForm = ({ values, handleChange, errors, touched, handleBlur }) => {

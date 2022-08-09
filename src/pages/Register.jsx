@@ -13,8 +13,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { GoogleRegister } from "../helpers/firebase";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Formik } from "formik";
-import { signUpSchema } from "../components/ComponentsStyles/formik/signUpSchema";
-import SignUpForm from "../components/ComponentsStyles/formik/SignUpForm";
+import { signUpSchema } from "../components/formik/signUpSchema";
+import SignUpForm from "../components/formik/SignUpForm";
 const Register = () => {
   const navigate = useNavigate();
   return (

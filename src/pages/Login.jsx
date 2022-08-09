@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Formik } from "formik";
-import { loginSchema } from "../components/ComponentsStyles/formik/LoginSchema";
-import LoginForm from "../components/ComponentsStyles/formik/LoginForm";
+import { loginSchema } from "../components/formik/LoginSchema";
+import LoginForm from "../components/formik/LoginForm";
 const Login = () => {
   return (
     <Grid

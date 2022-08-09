@@ -12,8 +12,12 @@ const NewBlog = () => {
   const navigate = useNavigate();
 
   // Bilgi Ekleme
+  if (title.length > 20) {
+    toastWarn("Title must be at most 20 characters");
+  }
   const AddBlog = (e) => {
     e.preventDefault();
+
     if (title && description && imageUrl) {
       const userRef = ref(db, "blog/");
       const newUserRef = push(userRef);
@@ -55,6 +59,7 @@ const NewBlog = () => {
               placeholder="Title"
               required
               autoFocus
+              maxLength={21}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />

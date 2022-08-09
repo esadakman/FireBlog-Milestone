@@ -1,8 +1,8 @@
 import { Button, Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
-import { toastWarn } from "../../../helpers/customToastify";
-import { register } from "../../../helpers/firebase";
+import { toastWarn } from "./../../helpers/customToastify";
+import { register } from "./../../helpers/firebase";
 
 const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
   const navigate = useNavigate();

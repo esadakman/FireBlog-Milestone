@@ -73,10 +73,10 @@ const BlogCard = ({ data }) => {
                         @{blog.author?.name.toLowerCase().replace(/\s/g, "")}
                       </span>
                       <h1 className={BlogCardStyle["title"]}>
-                        <p>{blog.title.slice(0, 24)}</p>
+                        <p>{blog.title.slice(0, 20)}</p>
                       </h1>
                       <p className={BlogCardStyle["text"]}>
-                        {blog.description.slice(0, 130)}...
+                        {blog.description.slice(0, 110)}...
                       </p>
                       <Button
                         onClick={() => handleDetails(blog)}
