@@ -11,12 +11,15 @@ const Home = () => {
       param.title.toLowerCase().includes(search.toLowerCase())
     );
   }
-  // console.log(search);
+  // {homeData.length > 0 ? <BlogCard data={homeData} /> : <NotFound />}
+  console.log(homeData);
   return (
     <div className={HomeStyle["container"]}>
       {isLoading ? (
         <BlogCard data={homeData} />
       ) : (
+        // {homeData.length > 0 ? <BlogCard data={homeData} /> : <NotFound />}
+
         <img src={loadingGif} alt="loading Gif"></img>
       )}
     </div>

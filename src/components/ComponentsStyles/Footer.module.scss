@@ -1,4 +1,4 @@
-@import "../../scss/mixins";
+@import "../../scss/mixins", "../../scss/variables";
 
 .FooterStyle {
   //   z-index: 5;
@@ -8,6 +8,7 @@
   background-color: rgba(255, 255, 255, 0.13);
   color: black;
   font-family: "Roboto", sans-serif;
+  background-color: $cardNavBgColor;
   align-items: center;
   height: 8vh;
   padding: 0 1.5rem;

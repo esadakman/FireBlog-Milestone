@@ -62,7 +62,7 @@ const Navbar = () => {
 
   const { userCheck } = useAuthContext();
   const navigate = useNavigate();
-  const { search, setSearch, data, setData } = useBlogContext();
+  const { search, setSearch } = useBlogContext();
 
   const handleLogOut = async (e) => {
     e.preventDefault();
@@ -191,6 +191,7 @@ const Navbar = () => {
               inputProps={{ "aria-label": "search" }}
               onChange={(e) => setSearch(e.target.value)}
               disabled={!userCheck}
+              value={search}
             />
           </Search>
           <Typography

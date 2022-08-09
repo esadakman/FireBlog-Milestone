@@ -5,7 +5,7 @@
   height: 85vh;
   display: flex;
   position: relative;
-  border: 1px solid red;
+  //   border: 1px solid red;
   font-family: "Roboto", sans-serif;
   overflow: hidden;
   .divStyled {
@@ -29,7 +29,23 @@
       font-weight: 100;
     }
     & > p {
+      font-size: 1.2rem;
       font-weight: 500;
+    }
+  }
+}
+
+@include media-sm {
+  .section {
+    height: 85vh;
+    .divStyled {
+      margin-top: 2rem;
+      width: 100vw;
+      align-items: center;
+      justify-content: flex-start;
+      & > img {
+        height: 18rem;
+      }
     }
   }
 }

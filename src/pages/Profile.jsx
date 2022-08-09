@@ -16,7 +16,9 @@ const Profile = () => {
   }
 
   return (
-    <div>{datas.length > 0 ? <BlogCard data={datas} /> : <NotFound />}</div>
+    <div style={{ minHeight: "83vh" }}>
+      {datas.length > 0 ? <BlogCard data={datas} /> : <NotFound />}
+    </div>
   );
 };
 

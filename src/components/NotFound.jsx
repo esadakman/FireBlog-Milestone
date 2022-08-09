@@ -8,7 +8,7 @@ const NotFound = () => {
       <div className={NotFoundStyle["divStyled"]}>
         <img src={vega} alt="" />
         <h1>404</h1>
-        <p>Ooppss... Something went wrong</p>
+        <p>Sorry, we couldn't find what you're looking for. </p>
       </div>
     </section>
   );
