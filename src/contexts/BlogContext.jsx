@@ -1,6 +1,7 @@
 import { getDatabase, onValue, ref, update } from "firebase/database";
 import { createContext, useContext, useEffect, useState } from "react";
-import app, { db } from "../helpers/firebase";
+import { toastWarn } from "../helpers/customToastify";
+import app, { auth, db } from "../helpers/firebase";
 const BlogContext = createContext({});
 
 // ? consume function (kendi hook'umu oluşturarak useContext yerine kullandım)
@@ -28,17 +29,31 @@ export const BlogContextProvider = ({ children }) => {
   }, []);
   // !LIKE
   const handleLikes = (info) => {
-    const like = info.likes.counter;
+    const like = info.likes;
     // console.log(info.likes);
-    update(ref(db, `blog/` + info.id), {
-      likes: { counter: like + 1, fav: true },
-    });
+    // if (Object.values(info.likes).includes(auth.currentUser.uid)) {
+    if (Object.values(info.fav).includes(auth.currentUser.uid)) {
+      // console.log(auth.currentUser.displayName);
+
+      toastWarn("You already liked this content");
+    } else {
+      update(ref(db, `blog/` + info.id), {
+        ...info,
+        likes: like + 1,
+        fav: [...info.fav, auth.currentUser.uid],
+      });
+    }
+    // else {
+    //   update(ref(db, `blog/` + info.id), {
+    //     likes: like - 1,
+    //   });
+    // }
   };
   const handleUnlikes = (info) => {
     const like = info.likes.counter;
-    update(ref(db, `blog/` + info.id), {
-      likes: { counter: like - 1, fav: false },
-    });
+    // update(ref(db, `blog/` + info.id), {
+    //   likes: { counter: like - 1, fav: false },
+    // });
   };
 
   const values = {

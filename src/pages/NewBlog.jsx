@@ -1,13 +1,11 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useAuthContext } from "../contexts/AuthContext";
 import NewBlogStyle from "./pagesStyles/NewBlog.module.scss";
 import { push, ref, set } from "firebase/database";
 import { auth, db } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
+import { toastWarn } from "../helpers/customToastify";
 
 const NewBlog = () => {
-  // const { userCheck } = useAuthContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -27,20 +25,20 @@ const NewBlog = () => {
           name: auth.currentUser.displayName,
           id: auth.currentUser.uid,
         },
-        // createdAt: new Date().toISOString().split("T")[0],
         createdAt: new Date().toLocaleString("en-us", {
           month: "long",
           year: "numeric",
           day: "numeric",
         }),
-        likes: { counter: 0, fav: false },
+        likes: 0,
+        fav: [""],
       });
       setTitle("");
       setDescription("");
       setImageUrl("");
       navigate("/");
     } else {
-      console.log("Please fill out all fields.");
+      toastWarn("Please fill out all fields.");
     }
   };
   // console.log(auth.currentUser.displayName);

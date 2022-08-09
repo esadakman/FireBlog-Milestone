@@ -8,7 +8,7 @@ const Profile = () => {
   const { data } = useBlogContext();
 
   let datas = data.filter((myBlog) => myBlog.author.id === userCheck.uid);
-  console.log(datas);
+  // console.log(datas);
   return (
     <div>
       <BlogCard data={datas} />

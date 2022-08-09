@@ -6,9 +6,12 @@ import { useBlogContext } from "../contexts/BlogContext";
 import { Button } from "@mui/material";
 import { useAuthContext } from "../contexts/AuthContext";
 import { toastWarn } from "../helpers/customToastify";
+import { update } from "firebase/database";
+import { ref } from "yup";
+import { auth, db } from "../helpers/firebase";
 
 const BlogCard = ({ data }) => {
-  const { handleLikes, handleUnlikes } = useBlogContext();
+  const { handleLikes } = useBlogContext();
   const { userCheck } = useAuthContext();
   const navigate = useNavigate();
 
@@ -19,9 +22,21 @@ const BlogCard = ({ data }) => {
       });
     } else {
       toastWarn("You Should Login to See Details");
+      // update(ref(db, `blog/`), {
+      //   likes: { fav: false },
+      // });
     }
     // console.log(blog);
   };
+
+  const likeCheck = (blog) => {
+    if (userCheck) {
+      handleLikes(blog);
+    } else {
+      toastWarn("Please login for like");
+    }
+  };
+
   return (
     <>
       <div className={BlogCardStyle["row"]}>
@@ -37,18 +52,19 @@ const BlogCard = ({ data }) => {
                 </div>
                 <ul className={BlogCardStyle["menu-content"]}>
                   <li style={{ transition: " all 2s linear" }}>
-                    {blog?.likes.fav ? (
+                    {/* {blog?.likes > 0 ? ( */}
+                    {blog?.fav.includes(auth.currentUser.uid) ? (
                       <FavoriteIcon
                         sx={{ color: "crimson" }}
-                        onClick={() => handleUnlikes(blog)}
+                        onClick={() => likeCheck(blog)}
                       />
                     ) : (
                       <FavoriteIcon
                         sx={{ color: "white" }}
-                        onClick={() => handleLikes(blog)}
+                        onClick={() => likeCheck(blog)}
                       />
                     )}
-                    <span>{blog?.likes.counter}</span>
+                    <span>{blog?.likes}</span>
                   </li>
                 </ul>
               </div>

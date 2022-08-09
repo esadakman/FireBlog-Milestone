@@ -13,51 +13,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import "./ComponentsStyles/Navbar.scss";
 import { useAuthContext } from "../contexts/AuthContext";
 import { logout } from "../helpers/firebase";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import { setNestedObjectValues } from "formik";
-import { useEffect, useState } from "react";
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  // maxWidth: "13rem",
-  [theme.breakpoints.up("sm")]: {
-    // marginLeft: theme.spacing(3),
-    // width: "auto",
-    maxWidth: "13rem",
-
-    marginLeft: 0,
-  },
-}));
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "10rem",
-    },
-  },
-}));
+import { useState } from "react";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -75,20 +31,6 @@ const Navbar = () => {
     e.preventDefault();
     await logout(navigate);
   };
-
-  const [search, setSearch] = useState("");
-
-
-  useEffect(() => {
-     if(search.length > 0){
-      fetch("https://fireblog-26-default-rtdb.firebaseio.com/.json").then(
-        response => response.json()
-      ).then(responseData => )
-     }
-  
-    
-  }, [third])
-  
 
   return (
     <AppBar position="static" color="info">
@@ -176,17 +118,7 @@ const Navbar = () => {
               )}
             </Menu>
           </Box>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              onChange={(e) => setSearch(e.target.value)}
-              value={search || ""}
-            />
-          </Search>
+
           <Typography
             variant="link"
             noWrap
