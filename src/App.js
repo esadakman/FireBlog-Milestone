@@ -16,7 +16,7 @@ function App() {
   return (
     <AuthContextProvider>
       <BlogContextProvider>
-        <ToastContainer />
+        <ToastContainer position="top-left" />
         <ThemeProvider theme={theme}>
           <AppRouter />
         </ThemeProvider>

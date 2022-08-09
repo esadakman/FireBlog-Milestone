@@ -76,7 +76,7 @@ const BlogCard = ({ data }) => {
                         <p>{blog.title.slice(0, 20)}</p>
                       </h1>
                       <p className={BlogCardStyle["text"]}>
-                        {blog.description.slice(0, 110)}...
+                        {blog.description.slice(0, 110)} ...
                       </p>
                       <Button
                         onClick={() => handleDetails(blog)}

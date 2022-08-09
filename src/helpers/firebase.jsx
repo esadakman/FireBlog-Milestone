@@ -14,13 +14,13 @@ import { toastError, toastSuccess, toastWarn } from "./customToastify";
 
 //! firebase console settings bölümünden firebaseconfig ayarlarını al
 const firebaseConfig = {
-  apiKey: "AIzaSyCoq2qmigC3rhWN4pdPnMVGz0NlpjNjRow",
-  authDomain: "fireblog-26.firebaseapp.com",
-  databaseURL: "https://fireblog-26-default-rtdb.firebaseio.com",
-  projectId: "fireblog-26",
-  storageBucket: "fireblog-26.appspot.com",
-  messagingSenderId: "648901323570",
-  appId: "1:648901323570:web:86fbde4a50f981cd6c452b",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
@@ -85,7 +85,6 @@ export const logout = async (navigate) => {
     return true;
   } catch (error) {
     toastError(error.message);
-    toastSuccess("asddd");
   }
 };
 

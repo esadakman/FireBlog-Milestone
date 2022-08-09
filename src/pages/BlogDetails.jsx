@@ -1,22 +1,19 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@mui/material";
-import BlogStyle from "./ComponentsStyles/BlogDetails.module.scss";
-import EditBlog from "./EditBlog";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import { ref, remove } from "firebase/database";
-import { db } from "../helpers/firebase";
+import BlogStyle from "./pagesStyles/BlogDetails.module.scss";
 import ReplyIcon from "@mui/icons-material/Reply";
 import notFound from "../assets/not-found.png";
+import { ref, remove } from "firebase/database";
+import { db } from "../helpers/firebase";
 import { toastSuccess } from "../helpers/customToastify";
+import EditBlog from "../components/EditBlog";
 
 export default function BlogDetails() {
   const { state } = useLocation();
   const { userCheck } = useAuthContext();
   const navigate = useNavigate();
-
-  // console.log(state.id);
-  // console.log(state);
   // ? DELETEContact
   const handleDelete = () => {
     remove(ref(db, `blog/` + state.id));

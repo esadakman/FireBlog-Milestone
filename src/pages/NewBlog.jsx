@@ -3,7 +3,7 @@ import NewBlogStyle from "./pagesStyles/NewBlog.module.scss";
 import { push, ref, set } from "firebase/database";
 import { auth, db } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
-import { toastWarn } from "../helpers/customToastify";
+import { toastSuccess, toastWarn } from "../helpers/customToastify";
 
 const NewBlog = () => {
   const [title, setTitle] = useState("");
@@ -12,7 +12,8 @@ const NewBlog = () => {
   const navigate = useNavigate();
 
   // Bilgi Ekleme
-  if (title.length > 20) {
+  if (title.length >= 20) {
+    // setTitle(title.slice(0, 19));
     toastWarn("Title must be at most 20 characters");
   }
   const AddBlog = (e) => {
@@ -41,6 +42,7 @@ const NewBlog = () => {
       setDescription("");
       setImageUrl("");
       navigate("/");
+      toastSuccess("Your post successfulyy published. ");
     } else {
       toastWarn("Please fill out all fields.");
     }
@@ -59,7 +61,7 @@ const NewBlog = () => {
               placeholder="Title"
               required
               autoFocus
-              maxLength={21}
+              maxLength={20}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />

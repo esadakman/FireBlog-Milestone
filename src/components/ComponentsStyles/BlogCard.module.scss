@@ -168,9 +168,14 @@
   .row {
     width: 80%;
     div.card {
-      // width: 60%;
-      max-width: 100%;
+      max-width: 450px;
       min-width: 100%;
     }
+  }
+}
+
+@include media-sm {
+  .row {
+    width: 100%;
   }
 }

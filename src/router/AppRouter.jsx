@@ -5,11 +5,11 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import BlogDetails from "../components/BlogDetails";
 import EditBlog from "../components/EditBlog";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useAuthContext } from "../contexts/AuthContext";
+import BlogDetails from "../pages/BlogDetails";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NewBlog from "../pages/NewBlog";

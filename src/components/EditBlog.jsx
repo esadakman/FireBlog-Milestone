@@ -34,7 +34,6 @@ const EditBlog = ({ editData }) => {
   const [newImageUrl, setNewImageUrl] = useState(editData.imageUrl);
   const handleUpdate = () => {
     // console.log(editData.likes);
-
     update(ref(db, `blog/` + editData.id), {
       title: newTitle,
       description: newDescription,
@@ -45,7 +44,7 @@ const EditBlog = ({ editData }) => {
     navigate("/");
   };
 
-  if (newTitle.length > 20) {
+  if (newTitle.length >= 21) {
     toastWarn("Title must be at most 20 characters");
   }
   return (
@@ -84,7 +83,7 @@ const EditBlog = ({ editData }) => {
                     variant="standard"
                     placeholder="Title"
                     // autoFocus
-                    maxLength={20}
+                    maxLength={21}
                     required
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
