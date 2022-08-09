@@ -168,19 +168,6 @@ const Register = () => {
                 </Grid>
               </Grid>
             </Box>
-            <Formik
-              initialValues={{ fullName: "", email: "", password: "" }}
-              validationSchema={signUpSchema}
-              onSubmit={(values, actions) => {
-                alert(`fullName: ${values.fullName}
-            email: ${values.email}
-            password: ${values.password}
-          `);
-                actions.resetForm();
-                actions.setSubmitting(false);
-              }}
-              component={(props) => <SignUpForm {...props} />}
-            ></Formik>
           </Box>
         </Box>
       </Grid>
