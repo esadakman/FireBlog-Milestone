@@ -14,7 +14,43 @@ import "./ComponentsStyles/Navbar.scss";
 import { useAuthContext } from "../contexts/AuthContext";
 import { logout } from "../helpers/firebase";
 import { useState } from "react";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import { useBlogContext } from "../contexts/BlogContext";
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  // maxWidth: "13rem",
+}));
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
 
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    // width: "100%",
+    // [theme.breakpoints.up("md")]: {
+    //   width: "12rem",
+    // },
+  },
+}));
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const handleOpenNavMenu = (event) => {
@@ -26,9 +62,11 @@ const Navbar = () => {
 
   const { userCheck } = useAuthContext();
   const navigate = useNavigate();
+  const { search, setSearch, data, setData } = useBlogContext();
 
   const handleLogOut = async (e) => {
     e.preventDefault();
+    setSearch("");
     await logout(navigate);
   };
 
@@ -41,6 +79,7 @@ const Navbar = () => {
             noWrap
             component={RouterLink}
             to="/"
+            onClick={() => setSearch("")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -83,11 +122,16 @@ const Navbar = () => {
                   <MenuItem
                     onClick={() => {
                       navigate(`/profile/${userCheck.displayName}`);
+                      setSearch("");
                     }}
                   >
                     My Profile
                   </MenuItem>
-                  <MenuItem component={RouterLink} to="/">
+                  <MenuItem
+                    component={RouterLink}
+                    to="/"
+                    onClick={() => setSearch("")}
+                  >
                     Home
                   </MenuItem>
                   <MenuItem component={RouterLink} to="/newblog">
@@ -97,28 +141,58 @@ const Navbar = () => {
                   <MenuItem
                     component={RouterLink}
                     to="/register"
-                    onClick={logout}
+                    onClick={() => {
+                      logout();
+                      setSearch("");
+                    }}
                   >
                     Log Out
                   </MenuItem>
                 </div>
               ) : (
                 <div>
-                  <MenuItem component={RouterLink} to="/">
+                  <MenuItem
+                    component={RouterLink}
+                    to="/"
+                    // onClick={() => setSearch("")}
+                  >
                     Home
                   </MenuItem>
-                  <MenuItem component={RouterLink} to="/login">
+                  <MenuItem
+                    component={RouterLink}
+                    to="/login"
+                    // onClick={() => setSearch("")}
+                  >
                     Login
                   </MenuItem>
 
-                  <MenuItem component={RouterLink} to="/register">
+                  <MenuItem
+                    component={RouterLink}
+                    to="/register"
+                    // onClick={() => setSearch("")}
+                  >
                     Register
                   </MenuItem>
                 </div>
               )}
             </Menu>
           </Box>
-
+          <Search
+            sx={{
+              maxWidth: { xs: "12rem", md: "15rem" /* md: "45%" */ },
+              // height: { sm: "10rem" },
+            }}
+          >
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search for a post ..."
+              inputProps={{ "aria-label": "search" }}
+              onChange={(e) => setSearch(e.target.value)}
+              disabled={!userCheck}
+            />
+          </Search>
           <Typography
             variant="link"
             noWrap
@@ -135,6 +209,7 @@ const Navbar = () => {
               textDecoration: "none",
               justifyContent: "flex-end",
             }}
+            onClick={() => setSearch("")}
           >
             <img src={logo} alt="logo" width="35rem" />
           </Typography>
@@ -158,6 +233,7 @@ const Navbar = () => {
                   sx={{ color: "white" }}
                   onClick={() => {
                     navigate("/");
+                    setSearch("");
                   }}
                 >
                   Home
@@ -167,6 +243,7 @@ const Navbar = () => {
                   sx={{ color: "white" }}
                   onClick={() => {
                     navigate("/newblog");
+                    setSearch("");
                   }}
                 >
                   New Blog

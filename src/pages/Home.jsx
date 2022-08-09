@@ -4,20 +4,20 @@ import { useBlogContext } from "../contexts/BlogContext";
 import HomeStyle from "./pagesStyles/Home.module.scss";
 
 const Home = () => {
-  const { isLoading, data } = useBlogContext();
-
+  const { isLoading, data, search } = useBlogContext();
+  let homeData = data;
+  if (search) {
+    homeData = data.filter((param) =>
+      param.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+  // console.log(search);
   return (
     <div className={HomeStyle["container"]}>
-      <div className={HomeStyle["searchContainer"]}>
-        <form className={HomeStyle["formContainer"]}>
-          <input type="text" placeholder="Search for a post ..." />
-          <button>Search</button>
-        </form>
-      </div>
       {isLoading ? (
-        <BlogCard data={data} />
+        <BlogCard data={homeData} />
       ) : (
-        <img src={loadingGif} /* style={{ width: "5rem" }}  */ alt=""></img>
+        <img src={loadingGif} alt="loading Gif"></img>
       )}
     </div>
   );

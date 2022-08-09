@@ -11,6 +11,9 @@ export const useBlogContext = () => {
 export const BlogContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState();
+  const [search, setSearch] = useState("");
+  // console.log(search);
+
   // ! REad
   useEffect(() => {
     const db = getDatabase(app);
@@ -50,6 +53,8 @@ export const BlogContextProvider = ({ children }) => {
     data,
     setData,
     handleLikes,
+    search,
+    setSearch,
   };
   return <BlogContext.Provider value={values}>{children}</BlogContext.Provider>;
 };
