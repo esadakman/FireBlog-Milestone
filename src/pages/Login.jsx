@@ -1,35 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { forgotPassword, GoogleRegister, login } from "../helpers/firebase";
-import { toastWarn } from "../helpers/customToastify";
+import React from "react";
 import {
   Avatar,
   Box,
-  Button,
   CssBaseline,
   Grid,
-  Link,
   Paper,
-  TextField,
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import GoogleIcon from "@mui/icons-material/Google";
+import { Formik } from "formik";
+import { loginSchema } from "../components/ComponentsStyles/formik/LoginSchema";
+import LoginForm from "../components/ComponentsStyles/formik/LoginForm";
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    // const user = await login(email, password, navigate);
-    if (email && password) {
-      await login(email, password, navigate);
-    } else {
-      toastWarn("Please fill out all fields.");
-    }
-  };
-
   return (
     <Grid
       container
@@ -69,73 +51,19 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleLogin}
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              // size="small"
-              onChange={(e) => setEmail(e.target.value)}
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              // size="small"
-              autoComplete="current-password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <div style={{ marginBottom: "1rem" }}>
-              <Button
-                variant="contained"
-                fullWidth
-                className="google"
-                onClick={() => {
-                  GoogleRegister(navigate);
-                }}
-              >
-                <GoogleIcon sx={{ width: "50px" }} />
-                Sign in with Google
-              </Button>
-            </div>
-            <Grid container justifyContent="flex-end">
-              <Grid item xs>
-                <Link
-                  href="#"
-                  variant="body2"
-                  onClick={() => forgotPassword(email)}
-                >
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="/register" variant="body2" component={RouterLink}>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            {/* //! FORMİK============== */}
+            <Formik
+              initialValues={{
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: "",
+              }}
+              validationSchema={loginSchema}
+              component={(props) => <LoginForm {...props} />}
+            ></Formik>
+            {/* //! FORMİK============== */}
           </Box>
         </Box>
       </Grid>
