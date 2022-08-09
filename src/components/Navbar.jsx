@@ -211,6 +211,7 @@ const Navbar = () => {
                 <MenuItem
                   onClick={() => {
                     navigate(`/profile/${userCheck.displayName}`);
+                    setSearch("");
                   }}
                 >
                   {userCheck.displayName}
