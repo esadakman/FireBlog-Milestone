@@ -7,15 +7,14 @@ import {
   Grid,
   Link,
   Paper,
-  TextField,
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { GoogleRegister } from "../helpers/firebase";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Formik } from "formik";
-import { signUpSchema } from "../components/signUpSchema";
-import SignUpForm from "../components/SignUpForm";
+import { signUpSchema } from "../components/ComponentsStyles/formik/signUpSchema";
+import SignUpForm from "../components/ComponentsStyles/formik/SignUpForm";
 const Register = () => {
   const navigate = useNavigate();
   return (
@@ -83,14 +82,6 @@ const Register = () => {
                   password: "",
                 }}
                 validationSchema={signUpSchema}
-                //       onSubmit={(values, actions) => {
-                //         alert(`fullName: ${values.fullName}
-                //   email: ${values.email}
-                //   password: ${values.password}
-                // `);
-                //         actions.resetForm();
-                //         actions.setSubmitting(false);
-                //       }}
                 component={(props) => <SignUpForm {...props} />}
               ></Formik>
               {/* //! FORMİK============== */}

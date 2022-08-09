@@ -1,8 +1,8 @@
 import { Button, Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
-import { toastWarn } from "../helpers/customToastify";
-import { register } from "../helpers/firebase";
+import { toastWarn } from "../../../helpers/customToastify";
+import { register } from "../../../helpers/firebase";
 
 const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
   const navigate = useNavigate();
@@ -10,14 +10,8 @@ const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
   // console.log(values.firstName);
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const displayName = `${values.firstName} ${values.lastName}`;
-    if (
-      values.email &&
-      values.password &&
-      values.firstName &&
-      values.lastName
-    ) {
-      await register(values.email, values.password, displayName, navigate);
+    if (values.email && values.password) {
+      await register(values.email, values.password, navigate);
     } else {
       toastWarn("Please fill out all fields.");
     }
@@ -29,39 +23,9 @@ const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
         spacing={2}
         sx={{ width: "100%" /* minHeight: "18rem" */ }}
       >
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="First Name"
-            name="firstName"
-            id="firstName"
-            type="text"
-            variant="outlined"
-            fullWidth
-            value={values.firstName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.firstName && errors.firstName}
-            error={touched.firstName && Boolean(errors.firstName)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Last Name"
-            name="lastName"
-            id="lastName"
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={values.lastName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.lastName && errors.lastName}
-            error={touched.lastName && Boolean(errors.lastName)}
-          />
-        </Grid>
         <Grid item xs={12}>
           <TextField
-            label="Email"
+            label="Email *"
             name="email"
             id="email"
             type="email"
@@ -76,7 +40,7 @@ const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            label="Password"
+            label="Password *"
             name="password"
             id="password"
             type="password"

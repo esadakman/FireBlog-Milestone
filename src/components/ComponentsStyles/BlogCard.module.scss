@@ -54,6 +54,7 @@
         padding: 1em;
         .date {
           float: left;
+          text-shadow: 0 0 10px black;
           font-size: 12px;
         }
       }
@@ -74,6 +75,7 @@
         }
         a {
           color: $white;
+
           text-decoration: none;
         }
         span {
@@ -91,12 +93,13 @@
       .data {
         color: $white;
         transform: translateY(calc(70px + 4em));
-        background-color: rgba(255, 255, 255, 0.308);
+        background-color: rgba(255, 255, 255, 0.449);
         position: absolute;
         bottom: 0px;
         width: 100%;
         transform: translateY(calc(90px + 3em));
         transition: transform 0.3s;
+
         .content {
           padding: 0.5rem 1rem;
           position: relative;
@@ -107,14 +110,17 @@
           }
           .author {
             font-size: 12px;
+            text-shadow: 0 13px 14px $backgroundColor;
           }
           .title {
-            // margin-top: 10px;
             margin-bottom: 10px;
+            text-shadow: 0 0 14px $backgroundColor;
           }
           .text {
             height: 80px;
             margin: 0;
+            font-weight: 600;
+            text-shadow: 0 13px 14px $backgroundColor;
           }
         }
       }
