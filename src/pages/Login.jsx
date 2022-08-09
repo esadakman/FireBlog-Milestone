@@ -55,8 +55,6 @@ const Login = () => {
             {/* //! FORMİK============== */}
             <Formik
               initialValues={{
-                firstName: "",
-                lastName: "",
                 email: "",
                 password: "",
               }}
