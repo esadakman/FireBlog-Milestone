@@ -1,11 +1,9 @@
 import React from "react";
 import NotFoundStyle from "./ComponentsStyles/NotFound.module.scss";
 import vega from "../assets/vincent.gif";
-import { useNavigate } from "react-router-dom";
 import { useBlogContext } from "../contexts/BlogContext";
 
 const NotFound = () => {
-  const navigate = useNavigate();
   const { setSearch } = useBlogContext();
 
   return (
@@ -18,7 +16,6 @@ const NotFound = () => {
           className={NotFoundStyle["buttonStyled"]}
           onClick={() => {
             setSearch("");
-            navigate(-1);
           }}
         >
           Go Back

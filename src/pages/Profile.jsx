@@ -4,6 +4,7 @@ import NotFound from "../components/NotFound";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useBlogContext } from "../contexts/BlogContext";
 import loadingGif from "../assets/loading.svg";
+import { Box } from "@mui/material";
 
 const Profile = () => {
   const { userCheck } = useAuthContext();
@@ -17,13 +18,13 @@ const Profile = () => {
   }
 
   return (
-    <div style={{ minHeight: "83vh" }}>
+    <Box sx={{ minHeight: { xs: "84.2vh", sm: "83vh" } }}>
       {isLoading ? (
         <>{datas?.length > 0 ? <BlogCard data={datas} /> : <NotFound />}</>
       ) : (
         <img src={loadingGif} alt="Loading Gif" />
       )}
-    </div>
+    </Box>
   );
 };
 
