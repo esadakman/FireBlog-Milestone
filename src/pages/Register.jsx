@@ -10,35 +10,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { GoogleRegister, register } from "../helpers/firebase";
+import { GoogleRegister } from "../helpers/firebase";
 import GoogleIcon from "@mui/icons-material/Google";
-import { toastWarn } from "../helpers/customToastify";
 import { Formik } from "formik";
+import { signUpSchema } from "../components/signUpSchema";
+import SignUpForm from "../components/SignUpForm";
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  //
-
   const navigate = useNavigate();
-  //
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    const displayName = `${firstName} ${lastName}`;
-    if (email && password && firstName && lastName) {
-      await register(email, password, displayName, navigate);
-    } else {
-      toastWarn("Please fill out all fields.");
-    }
-  };
   return (
     <Grid
       container
       component="main"
-      sx={{ height: { xs: "84.2vh", sm: "83vh" } }}
+      sx={{ minHeight: { xs: "84.2vh", sm: "83vh" } }}
     >
       <CssBaseline />
       <Grid
@@ -70,10 +54,12 @@ const Register = () => {
         >
           <Box
             sx={{
-              marginTop: 8,
+              // marginTop: 6,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
+              minHeight: { xs: "83.2vh", sm: "82vh" },
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -83,74 +69,30 @@ const Register = () => {
               Sign up
             </Typography>
             <Box
-              component="form"
-              noValidate
-              onSubmit={handleSignUp}
-              sx={{ mt: 1 }}
+              // component="form"
+              // noValidate
+              // onSubmit={handleSignUp}
+              sx={{ mt: 2 }}
             >
               {/* //! FORMİK============== */}
-              {/* <Formik> */}
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    name="firstName"
-                    variant="outlined"
-                    size="small"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    size="small"
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    // autoComplete="family-name"
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    size="small"
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    // autoComplete="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    size="small"
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
-              </Button>
-              {/* </Formik> */}
+              <Formik
+                initialValues={{
+                  firstName: "",
+                  lastName: "",
+                  email: "",
+                  password: "",
+                }}
+                validationSchema={signUpSchema}
+                //       onSubmit={(values, actions) => {
+                //         alert(`fullName: ${values.fullName}
+                //   email: ${values.email}
+                //   password: ${values.password}
+                // `);
+                //         actions.resetForm();
+                //         actions.setSubmitting(false);
+                //       }}
+                component={(props) => <SignUpForm {...props} />}
+              ></Formik>
               {/* //! FORMİK============== */}
 
               <div style={{ marginBottom: "1rem" }}>

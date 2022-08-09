@@ -2,23 +2,22 @@ import * as Yup from "yup";
 
 export const signUpSchema = Yup.object().shape({
   firstName: Yup.string()
-    .max(20, "fullname 20 veya daha az karakter olmalıdır")
-    .required("Please fill out this field"),
+    .max(20, "Must be at most 20 characters")
+    .required("Please enter a first name"),
 
   lastName: Yup.string()
-    .max(20, "fullname 20 veya daha az karakter olmalıdır")
-    .required("Please fill out this field"),
+    .max(20, "Must be at most 20 characters")
+    .required("Please enter a last name"),
 
   email: Yup.string()
-    .email("Lutfen gecerli email adresini giriniz.")
+    .email("Please enter a valid email address")
     .required("Please fill out this field"),
 
   password: Yup.string()
-    .min(8, "Sifre en az 8 karakter icermelidir")
-    .max(16, "Sifre en fazla 16 karakter icermelidir.")
+    .min(8, "Password should be at least 8 characters")
+    .max(16, "Password  should be maximum 16 characters")
     .required("Please fill out this field")
-    .matches(/\d+/, "Sifre rakam icermelidir")
-    .matches(/[a-z]+/, "Sifre kucuk harf icermelidir")
-    .matches(/[A-Z]+/, "Sifre buyuk harf icermelidir")
-    .matches(/[!,?{}><%&$#£+-.]+/, "Sifreniz ozel karakter icermelidir"),
+    .matches(/\d+/, "Password should contain numbers ")
+    .matches(/[a-z]+/, "Password should contain letters "),
+  // .matches(/[A-Z]+/, "Sifre buyuk harf icermelidir"),
 });
