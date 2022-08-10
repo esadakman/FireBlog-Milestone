@@ -2,7 +2,8 @@ import { Button, Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import { toastWarn } from "./../../helpers/customToastify";
-import { register } from "./../../helpers/firebase";
+import { GoogleRegister, register } from "./../../helpers/firebase";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
   const navigate = useNavigate();
@@ -24,11 +25,7 @@ const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
   };
   return (
     <>
-      <Grid
-        container
-        spacing={2}
-        sx={{ width: "100%" /* minHeight: "18rem" */ }}
-      >
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
             label="First Name *"
@@ -99,6 +96,19 @@ const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
       >
         Sign Up
       </Button>
+      <div style={{ marginBottom: "1rem" }}>
+        <Button
+          variant="contained"
+          fullWidth
+          className="google"
+          onClick={() => {
+            GoogleRegister(navigate);
+          }}
+        >
+          <GoogleIcon sx={{ width: "50px" }} />
+          Sign up with Google
+        </Button>
+      </div>
     </>
   );
 };

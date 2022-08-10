@@ -101,6 +101,8 @@ export const GoogleRegister = (navigate) => {
     .catch((error) => {
       if (error.code === "auth/popup-closed-by-user") {
         console.log("Popup closed by user");
+      } else if (error.code === "auth/cancelled-popup-request") {
+        console.log("cancelled-popup-request");
       } else {
         toastError(error.message);
       }

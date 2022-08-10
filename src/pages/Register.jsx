@@ -1,8 +1,7 @@
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Avatar,
   Box,
-  Button,
   CssBaseline,
   Grid,
   Link,
@@ -10,13 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { GoogleRegister } from "../helpers/firebase";
-import GoogleIcon from "@mui/icons-material/Google";
 import { Formik } from "formik";
 import { signUpSchema } from "../components/formik/signUpSchema";
 import SignUpForm from "../components/formik/SignUpForm";
 const Register = () => {
-  const navigate = useNavigate();
   return (
     <Grid
       container
@@ -68,10 +64,10 @@ const Register = () => {
               Sign Up
             </Typography>
             <Box
-              // component="form"
-              // noValidate
-              // onSubmit={handleSignUp}
-              sx={{ mt: 2 }}
+              sx={{
+                mt: 2,
+                width: "100%",
+              }}
             >
               {/* //! FORMİK============== */}
               <Formik
@@ -86,19 +82,6 @@ const Register = () => {
               ></Formik>
               {/* //! FORMİK============== */}
 
-              <div style={{ marginBottom: "1rem" }}>
-                <Button
-                  variant="contained"
-                  fullWidth
-                  className="google"
-                  onClick={() => {
-                    GoogleRegister(navigate);
-                  }}
-                >
-                  <GoogleIcon sx={{ width: "50px" }} />
-                  Sign up with Google
-                </Button>
-              </div>
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link to="/login" variant="body2" component={RouterLink}>

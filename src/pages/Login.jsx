@@ -23,7 +23,9 @@ const Login = () => {
         item
         xs={false}
         sm={4}
-        md={7}
+        md={6}
+        lg={8}
+        // lg={7}
         sx={{
           backgroundImage: "url(https://source.unsplash.com/random)",
           backgroundRepeat: "no-repeat",
@@ -35,7 +37,17 @@ const Login = () => {
           backgroundPosition: "center",
         }}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        lg={4}
+        md={6}
+        // lg={5}
+        component={Paper}
+        elevation={6}
+        square
+      >
         <Box
           sx={{
             my: 8,
@@ -51,7 +63,15 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign In
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            noValidate
+            sx={{
+              mt: 1,
+              //  width: { md: "100%" }
+              width: "100%",
+            }}
+          >
             {/* //! FORMİK============== */}
             <Formik
               initialValues={{

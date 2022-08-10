@@ -26,7 +26,7 @@ const LoginForm = ({ values, handleChange, errors, touched, handleBlur }) => {
         <Grid
           container
           spacing={2}
-          sx={{ width: "100%" /* minHeight: "18rem" */ }}
+          // sx={{ width: "104%" /* minHeight: "18rem" */ }}
         >
           <Grid item xs={12}>
             <TextField
