@@ -23,13 +23,13 @@
   .Logos {
     display: flex;
     justify-content: space-between;
-    gap: 0.7rem;
+    gap: 1rem;
     & > a {
       transition: all 0.3s linear;
       color: white;
       &:hover {
         color: aqua;
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
     }
   }
