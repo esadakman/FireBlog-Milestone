@@ -14,7 +14,7 @@ export const signUpSchema = Yup.object().shape({
     .required("Please fill out this field"),
 
   password: Yup.string()
-    .min(8, "Password should be at least 8 characters")
+    .min(6, "Password should be at least 6 characters")
     .max(16, "Password  should be maximum 16 characters")
     .required("Please fill out this field")
     .matches(/\d+/, "Password should contain numbers ")

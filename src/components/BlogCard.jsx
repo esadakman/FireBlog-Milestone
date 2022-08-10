@@ -21,6 +21,7 @@ const BlogCard = ({ data }) => {
       });
     } else {
       toastWarn("You should login to see details");
+      // navigate("/login");
     }
   };
 
@@ -28,7 +29,8 @@ const BlogCard = ({ data }) => {
     if (userCheck) {
       handleLikes(blog);
     } else {
-      toastWarn("Please login for like");
+      toastWarn("You should login for like posts");
+      navigate("/login");
     }
   };
 
@@ -76,7 +78,8 @@ const BlogCard = ({ data }) => {
                         <p>{blog.title.slice(0, 20)}</p>
                       </h1>
                       <p className={BlogCardStyle["text"]}>
-                        {blog.description.slice(0, 110)} ...
+                        {blog.description.slice(0, 118)} ...
+                        {/* {blog.description} */}
                       </p>
                       <Button
                         onClick={() => handleDetails(blog)}

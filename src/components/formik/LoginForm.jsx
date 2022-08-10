@@ -66,7 +66,7 @@ const LoginForm = ({ values, handleChange, errors, touched, handleBlur }) => {
           sx={{ mt: 3, mb: 2 }}
           onClick={handleLogin}
         >
-          Sign Up
+          LOGIN
         </Button>
         <Button
           variant="contained"

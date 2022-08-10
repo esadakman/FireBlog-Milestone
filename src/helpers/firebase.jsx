@@ -43,12 +43,12 @@ export const register = async (email, password, displayName, navigate) => {
     return user;
   } catch (error) {
     if (error.code === "auth/email-already-in-use") {
-      toastError("The email address is already in use");
+      toastError("This email address is already in use");
     } else if (
       error.code === "auth/invalid-email" ||
       error.code === "auth/missing-email"
     ) {
-      toastWarn("The email address is not valid.");
+      toastWarn("This email address is not valid.");
     } else if (error.code === "auth/weak-password") {
       toastWarn("Password should be at least 6 characters");
     } else {
@@ -60,7 +60,7 @@ export const register = async (email, password, displayName, navigate) => {
 export const login = async (email, password, navigate) => {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-    toastSuccess("Logged In");
+    toastSuccess("Logged in ");
     navigate("/");
     return user;
   } catch (error) {
@@ -80,7 +80,7 @@ export const login = async (email, password, navigate) => {
 export const logout = async (navigate) => {
   try {
     await signOut(auth);
-    toastWarn("Logged out !");
+    toastSuccess("Logged out !");
     navigate("/login");
     return true;
   } catch (error) {
@@ -94,7 +94,7 @@ export const GoogleRegister = (navigate) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
-      toastSuccess("Logged In");
+      toastSuccess("Logged in ");
       navigate("/");
       return user;
     })
@@ -112,7 +112,7 @@ export const forgotPassword = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
-      console.log("Please check your mail box!");
+      toastWarn("Please check your mail box!");
       // alert("Please check your mail box!");
     })
     .catch((error) => {

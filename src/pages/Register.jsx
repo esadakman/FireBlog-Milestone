@@ -65,7 +65,7 @@ const Register = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Sign Up
             </Typography>
             <Box
               // component="form"
