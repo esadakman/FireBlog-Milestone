@@ -8,6 +8,7 @@ import {
 import EditBlog from "../components/EditBlog";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import NotFound from "../components/NotFound";
 import { useAuthContext } from "../contexts/AuthContext";
 import BlogDetails from "../pages/BlogDetails";
 import Home from "../pages/Home";
@@ -38,6 +39,7 @@ const AppRouter = () => {
           <Route path="/profile:displayName" element={<Profile />} />
         </Route>
         <Route path="/newblog" element={<NewBlog />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>

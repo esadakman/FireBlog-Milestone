@@ -18,13 +18,25 @@ SOLUTION
 ├── public
 │     └── index.html
 ├── src
-│    ├── app-router
-│    │       ├── AppRouter.js
-│    │       └── PrivateRouter.js
+│    ├── assets
+│    │       └── [images]
 │    ├── components
-│    │       ├── BlogCard.js
-│    │       ├── BlogForm.js
-│    │       └── Navbar.js
+│    │       ├── ComponentsStyles
+│    │       │     ├── BlogCard.module.scss
+│    │       │     ├── EditBlog.module.scss
+│    │       │     ├── Navbar.scss
+│    │       │     ├── Home.module.scss
+│    │       │     └── NotFound.module.scss
+│    │       ├── formik
+│    │       │     ├── LoginForm.jsx
+│    │       │     ├── LoginSchema.jsx
+│    │       │     ├── SignUpForm.jsx
+│    │       │     └── signUpSchema.jsx
+│    │       ├── BlogCard.jsx
+│    │       ├── EditBlog.jsx
+│    │       ├── Footer.jsx
+│    │       ├── Navbar.jsx
+│    │       └── NotFound.jsx
 │    ├── contexts
 │    │       ├── AuthContext.js
 │    │       └── BlogContext.js
@@ -32,20 +44,25 @@ SOLUTION
 │    │       ├── firebase.js
 │    │       └── toastNotify.js
 │    ├── pages
-│    │       ├── About.js
-│    │       ├── Dashboard.js
-│    │       ├── Details.js
-│    │       ├── Login.js
-│    │       ├── NewBlog.js
-│    │       ├── Profile.js
-│    │       ├── Register.js
-│    │       └── UpdateBlog.js
-│    ├── assets.js
-│    │       └── [images]
+│    │      ├── pagesStyle
+│    │      │     ├── BlogDetails.module.scss
+│    │      │     ├── Home.module.scss
+│    │      │     └── NewBlog.module.scss
+│    │      ├── BlogDetails.jsx
+│    │      ├── Home.jsx
+│    │      ├── Login.jsx
+│    │      ├── NewBlog.jsx
+│    │      ├── Profile.jsx
+│    │      └── Register.jsx
+│    ├── router
+│    │       └─── AppRouter.jsx
+│    ├── scss
+│    │     ├── _mixins.scss
+│    │     ├── _reset.scss
+│    │     └── _variables.scss
 │    ├── App.js
-│    ├── App.css
 │    ├── index.js
-│    └── index.css
+│    └── index.scss
 ├── .env
 ├── package.json
 └── yarn.lock
