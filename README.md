@@ -24,7 +24,7 @@ SOLUTION
 │    │       ├── ComponentsStyles
 │    │       │     ├── BlogCard.module.scss
 │    │       │     ├── EditBlog.module.scss
-│    │       │     ├── Navbar.scss
+│    │       │     ├── Navbar.module.scss
 │    │       │     ├── Home.module.scss
 │    │       │     └── NotFound.module.scss
 │    │       ├── formik
