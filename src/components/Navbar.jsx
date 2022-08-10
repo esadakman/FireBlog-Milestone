@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/logo.png";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import "./ComponentsStyles/Navbar.scss";
+import NavbarStyled from "./ComponentsStyles/Navbar.module.scss";
 import { useAuthContext } from "../contexts/AuthContext";
 import { logout } from "../helpers/firebase";
 import { useState } from "react";
@@ -207,7 +207,7 @@ const Navbar = () => {
             }}
           >
             {userCheck ? (
-              <div sx={{ display: "flex" }} className="links">
+              <div sx={{ display: "flex" }} className={NavbarStyled["links"]}>
                 <MenuItem
                   onClick={() => {
                     navigate(`/profile/${userCheck.displayName}`);
