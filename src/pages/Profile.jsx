@@ -15,17 +15,19 @@ const Profile = () => {
     datas = datas.filter((param) =>
       param.title.toLowerCase().includes(search.toLowerCase())
     );
+    console.log(datas);
   }
 
   return (
     <Box sx={{ minHeight: { xs: "84.2vh", sm: "83vh" } }}>
-      {isLoading ? (
-        // <>{datas?.length > 0 ? <BlogCard data={datas} /> : <NotFound />}</>
-
-        <>{datas?.length > 0 ? <BlogCard data={datas} /> : <p>esad</p>}</>
+      {isLoading && data ? (
+        // <>{datas.length > 0 ? <BlogCard data={datas} /> : <NotFound />}</>
+        <BlogCard data={datas} />
       ) : (
         <img src={loadingGif} alt="Loading Gif" />
       )}
+      {/* {isLoading && datas?.length > 0(<BlogCard data={datas} />)} */}
+      {/* {!isLoading && (<BlogCard data={datas} />)} */}
     </Box>
   );
 };
