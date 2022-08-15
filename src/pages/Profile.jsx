@@ -1,6 +1,6 @@
 import React from "react";
 import BlogCard from "../components/BlogCard";
-import NotFound from "../components/NotFound";
+// import NotFound from "../components/NotFound";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useBlogContext } from "../contexts/BlogContext";
 import loadingGif from "../assets/loading.svg";
