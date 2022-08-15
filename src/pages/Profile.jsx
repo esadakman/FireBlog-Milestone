@@ -20,7 +20,9 @@ const Profile = () => {
   return (
     <Box sx={{ minHeight: { xs: "84.2vh", sm: "83vh" } }}>
       {isLoading ? (
-        <>{datas?.length > 0 ? <BlogCard data={datas} /> : <NotFound />}</>
+        // <>{datas?.length > 0 ? <BlogCard data={datas} /> : <NotFound />}</>
+
+        <>{datas?.length > 0 ? <BlogCard data={datas} /> : <p>esad</p>}</>
       ) : (
         <img src={loadingGif} alt="Loading Gif" />
       )}
