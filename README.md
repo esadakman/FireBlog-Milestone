@@ -90,8 +90,7 @@ SOLUTION
 To run this project;
 
 - Signup `https://firebase.google.com/` and create new app in firebase.
-- Use `https://firebase.google.com/docs/auth/web/start` and create Firebase Auth for `Authentication` and Firebase Realtime Database for `CRUD` operations (Don't forget to change read and write values to true).
--
+- Use `https://firebase.google.com/docs/auth/web/start` and create Firebase Auth for `Authentication` and Firebase Realtime Database for `CRUD` operations (Don't forget to change read and write values to true). 
 - Create a .env file and set your
   -- REACT_APP_FIREBASE_API_KEY,
   -- REACT_APP_FIREBASE_AUTH_DOMAIN,
