@@ -103,7 +103,7 @@ To run this project;
 - After these you can run the project as usual =>
 
 ```
-$ git clone https://github.com/esadakman/FireBlog-Milestone.git
+$ git clone https://github.com/esadakman/reactjs-fireblog.git
 $ cd ./FireBlog-Milestone
 $ npm install / yarn
 $ npm start / yarn start
