@@ -91,15 +91,14 @@ To run this project;
 
 - Signup `https://firebase.google.com/` and create new app in firebase.
 - Use `https://firebase.google.com/docs/auth/web/start` and create Firebase Auth for `Authentication` and Firebase Realtime Database for `CRUD` operations (Don't forget to change read and write values to true). 
-- Create a .env file and set your
-  -- REACT_APP_FIREBASE_API_KEY,
-  -- REACT_APP_FIREBASE_AUTH_DOMAIN,
-  -- REACT_APP_FIREBASE_DATABASE_URL
-  -- REACT_APP_FIREBASE_PROJECT_ID,
-  -- REACT_APP_FIREBASE_STORAGE_BUCKET,
-  -- REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  -- REACT_APP_FIREBASE_APP_ID for firebase access
-
+```- Create a .env file and set your
+REACT_APP_FIREBASE_API_KEY,
+REACT_APP_FIREBASE_AUTH_DOMAIN,
+REACT_APP_FIREBASE_DATABASE_URL
+REACT_APP_FIREBASE_PROJECT_ID,
+REACT_APP_FIREBASE_STORAGE_BUCKET,
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+```
 - After these you can run the project as usual =>
 
 ```
