@@ -27,7 +27,7 @@ const Login = () => {
         lg={8}
         // lg={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random)",
+          backgroundImage: "url(https://source.unsplash.com/user/erondu/1600x900)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
