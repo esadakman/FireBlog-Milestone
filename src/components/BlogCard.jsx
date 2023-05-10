@@ -21,7 +21,7 @@ const BlogCard = ({ data }) => {
       });
     } else {
       toastWarn("You should login to see details");
-      // navigate("/login");
+      navigate("/login");
     }
   };
 
